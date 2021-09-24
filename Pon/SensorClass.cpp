@@ -1,6 +1,5 @@
 #include "SensorCLass.h"
 
-
 void SensorClass::init(int Imp, int Ie, int i) {
 	setMPID(Imp);
 	setE(Ie);
@@ -11,8 +10,8 @@ bool SensorClass::SensorLesen() {
 	
 	sourceSelect();
 	
-//	SensorWert = analogRead(MPID);
-	if (SensorWert < 500) {
+	SensorWert = analogRead(MPID);
+	if (SensorWert < SensorSchwellwert) {
 		status = true;
 	}
 	else {
@@ -20,6 +19,7 @@ bool SensorClass::SensorLesen() {
 	}
 	return status;
 }
+
 int SensorClass::getID() {
 	return ID;
 	}
@@ -42,10 +42,10 @@ void SensorClass::sourceSelect() {
 	int E2 = ((E/2) % 2);
 	int E1 = ((E/4) % 2);
   int E0 = ((E/8) % 2);
-/*	digitalWrite((MPID * 4), E0);
+	digitalWrite((MPID * 4), E0);
 	digitalWrite((MPID * 4)+1, E1);
 	digitalWrite((MPID * 4)+2, E2);
-  digitalWrite((MPID * 4)+3, E3);*/
+  digitalWrite((MPID * 4)+3, E3);
 
 
 }

@@ -1,41 +1,41 @@
-
-#define AnzahlSensor 34
-#define AnzahlRinge 22 
-#define AnzahlLEDproRing 24
-#define AnzahlMP 2
-#define AnzahlProMP 16
-#define AnzahlSelectMP 4
-#define firstSelectPin 5
-#define selectStartPin 0
-
 #include "BecherClass.h"
-#include "SensorCLass.h"
+#include "SensorClass.h"
+#include "ButtonClass.h"
+
+#define AnzahlButton 2
 
 int SensorPins[AnzahlSensor-(AnzahlMP*AnzahlProMP)+AnzahlMP] = { 0,1,2,3};
 
 //inits
 void initSensor();
 void initLED();
+void initButton();
+
+void SensorEinlesen();
+void Buttoneinlesen();
 
 bool zustandBecher[AnzahlSensor];
 int LedID[AnzahlRinge][AnzahlLEDproRing];
 void aktAnzeige();
-void einlesen();
+
+
 void ringeAktualisieren();
 int MPArray[AnzahlMP][AnzahlProMP];
 
 
 BecherClass Becher[AnzahlRinge];
 SensorClass Sensoren[AnzahlSensor];
-
-    
+ButtonClass StartButton;
+ButtonClass ResetButton;
 
     
 /*   for(int i=0; i++; i<AnzahlSensor){
     SensorClass * Sensoren[AnzahlSensor];
     Sensoren[i] = new SensorClass();
 }*/
-  
+int PinStartButton = 2;
+int PinResetButton = 3;
+
 void setup()
 {
 Serial.begin(115200);
@@ -50,7 +50,7 @@ for(int i=0; i++; i<AnzahlSensor){
 }*/
 
     //Sensoren Initialisieren
-initSensor();
+    initSensor();
 
     
     //Kreise initialisieren
@@ -58,6 +58,7 @@ initSensor();
     //Stripes initialisieren
 
     //Buttons Initialisieren
+    initButton();
 
     initLED();
 }
@@ -69,56 +70,32 @@ void loop()
 {
 
     //Sensoren einlesen
-    einlesen();
-   
+    SensorEinlesen();
+    //button einlesen
     //ringeAktualisieren();
                 Becher[0].rot();
     aktAnzeige();
 
-//Sensoren[0].SensorenLesen;
         //
 
-        /*
-        int sensor_1;
-        int sensor_2;
-        int sensor_3;
-        int tischgewicht_1 = 0;
-        int tischgewicht_2 = 0;
-        int tischgewicht_3 = 0;
-        int buttonPin = 12;
-        boolean buttonPress;
+ 
 
-        void setup() {
-            pinMode(buttonPin, INPUT_PULLUP);
-            Serial.begin(9600);
-        }
 
-        void loop() {
-            buttonPress = digitalRead(buttonPin);
-            if (buttonPress == 0) {
-                tischgewicht();
-            }
-            sensor_1 = analogRead(A0) - tischgewicht_1;
-            sensor_2 = analogRead(A1) - tischgewicht_2;
-            sensor_3 = analogRead(A2) - tischgewicht_3;
-            Serial.print("(");
-            Serial.print(sensor_1);
-            Serial.print("|");
-            Serial.print(sensor_2);
-            Serial.print("|");
-            Serial.print(sensor_3);
-            Serial.println(")");
-        }
-*/
+           
+  delay(1000);
 }
 
 
 
-void einlesen(){
+void SensorEinlesen(){
 
-    for (int i = 0; i++; i < AnzahlSensor) {
+    for (int i = 0; i++; i < AnzahlSensor) {   
         zustandBecher[i] = Sensoren[i].SensorLesen();
     }
+}
+
+void ButtonEinlesen(){
+  
 }
 
 void ringeAktualisieren(){
@@ -155,4 +132,9 @@ void initSensor() {
     Sensoren[i].init(0,0,AnzahlSensor-1);
     i++;
     Sensoren[i].init(0,0,AnzahlSensor-2);
+}
+
+void initButton(){
+  StartButton.init(PinStartButton);
+  ResetButton.init(PinResetButton);
 }

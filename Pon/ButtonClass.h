@@ -1,5 +1,3 @@
-#define AnzahlRinge 22 
-#define AnzahlLEDproRing 24
 
 #if defined(ARDUINO) && ARDUINO >= 100
   #include "arduino.h"
@@ -7,14 +5,13 @@
   #include "WProgram.h"
 #endif
 
-class BecherClass
+class ButtonClass
 {
 private:
   bool status;
+  int Pin;
   
 public:
-  void init();
-  void rot();
-  void gruen();
-  bool getstatus();
+  void init(int pin);
+  bool lesen();
 };
