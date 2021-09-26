@@ -10,7 +10,7 @@ bool SensorClass::SensorLesen() {
 	
 	sourceSelect();
 	
-	SensorWert = analogRead(MPID);
+	SensorWert = analogRead(MPID+firstMPPin);
 	if (SensorWert < SensorSchwellwert) {
 		status = true;
 	}
@@ -36,18 +36,15 @@ void SensorClass::setMPID(int mpid) {
 	this->MPID = mpid;
 }
 
-void SensorClass::sourceSelect() {
-	
+void SensorClass::sourceSelect() {	
 	int E3 = (E % 2);
 	int E2 = ((E/2) % 2);
 	int E1 = ((E/4) % 2);
-  int E0 = ((E/8) % 2);
-	digitalWrite((MPID * 4), E0);
-	digitalWrite((MPID * 4)+1, E1);
-	digitalWrite((MPID * 4)+2, E2);
-  digitalWrite((MPID * 4)+3, E3);
-
-
+	int E0 = ((E/8) % 2);
+	digitalWrite((MPID * 4)+firstSelectPin, E0);
+	digitalWrite((MPID * 4)+1+ firstSelectPin, E1);
+	digitalWrite((MPID * 4)+2+ firstSelectPin, E2);
+	digitalWrite((MPID * 4)+3+ firstSelectPin, E3);
 }
 
 void SensorClass::setE(int e) {

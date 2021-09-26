@@ -4,23 +4,23 @@
 
 #define AnzahlButton 2
 
-int SensorPins[AnzahlSensor-(AnzahlMP*AnzahlProMP)+AnzahlMP] = { 0,1,2,3};
 
 //inits
 void initSensor();
 void initLED();
 void initButton();
 
+//Einlesen
 void SensorEinlesen();
-void Buttoneinlesen();
+void ButtonEinlesen();
 
 bool zustandBecher[AnzahlSensor];
-int LedID[AnzahlRinge][AnzahlLEDproRing];
+int LedRingID[AnzahlRinge][AnzahlLEDproRing];
 void aktAnzeige();
 
+//Ausgeben
 
 void ringeAktualisieren();
-int MPArray[AnzahlMP][AnzahlProMP];
 
 
 BecherClass Becher[AnzahlRinge];
@@ -28,27 +28,18 @@ SensorClass Sensoren[AnzahlSensor];
 ButtonClass StartButton;
 ButtonClass ResetButton;
 
-    
-/*   for(int i=0; i++; i<AnzahlSensor){
-    SensorClass * Sensoren[AnzahlSensor];
-    Sensoren[i] = new SensorClass();
-}*/
+
 int PinStartButton = 2;
 int PinResetButton = 3;
 
 void setup()
 {
-Serial.begin(115200);
-
-int SourceselectPins[AnzahlMP * AnzahlSelectMP] = {0,1,2,3,4,5,6,7};
-int MPPins[AnzahlMP] = { 0,1 };          //Multiplexer auf analoge eing�nge ab 0 stecken
-
-                                            
-                                            /*
-for(int i=0; i++; i<AnzahlSensor){
-    Becher[i] = new BecherClass();
-}*/
-
+    Serial.begin(115200);
+    
+    int SensorPins[] = {0,1,2,3};       //ersten zwei sind Multiplexer
+    int SourceselectPins[] = {0,1,2,3,4,5,6,7};
+    int MPPins[] = {0,1};          //Multiplexer auf analoge eing�nge ab 0 stecken
+                              
     //Sensoren Initialisieren
     initSensor();
 
@@ -76,7 +67,7 @@ void loop()
                 Becher[0].rot();
     aktAnzeige();
 
-        //
+        //ringe nächte led höher
 
  
 
@@ -89,7 +80,7 @@ void loop()
 
 void SensorEinlesen(){
 
-    for (int i = 0; i++; i < AnzahlSensor) {   
+    for (int i = 0; i < AnzahlSensor; i++) {
         zustandBecher[i] = Sensoren[i].SensorLesen();
     }
 }
@@ -99,7 +90,7 @@ void ButtonEinlesen(){
 }
 
 void ringeAktualisieren(){
-    for (int i = 0; i++; i < AnzahlRinge) {
+    for (int i = 0; i < AnzahlRinge; i++) {
         if (zustandBecher == true) {
 //            Becher[i]->rot;
         }
@@ -112,17 +103,17 @@ int a;
 }
 
 void initLED(){
-    for(int m=0; m++; m<(AnzahlLEDproRing*AnzahlRinge))
+    for(int m=0; m<(AnzahlLEDproRing*AnzahlRinge); m++)
     for (int i = 0; i < AnzahlRinge; i++) {
         for (int n = 0; n++; n < AnzahlLEDproRing) {
-            LedID[i][n]=m;
+            LedRingID[i][n]=m;
         }
     }
 }
 
 void initSensor() {
     int i = 0;
-    for (int Imp = 0; Imp++; Imp < AnzahlMP) {              //alle multiplexer durchgehen
+    for (int Imp = 0; Imp < AnzahlMP; Imp++) {              //alle multiplexer durchgehen
         pinMode(Imp, INPUT);
         for (int Ie; Ie < AnzahlProMP; Ie++) {              //alle eing�nge eines MP durchgehen
             Sensoren[i].init(Imp, Ie, i);

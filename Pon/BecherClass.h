@@ -10,11 +10,11 @@
 class BecherClass
 {
 private:
-  bool status;
+	bool status;
   
 public:
-  void init();
-  void rot();
-  void gruen();
-  bool getstatus();
+	void init();
+	void rot();
+	void gruen();
+	bool getstatus();
 };
