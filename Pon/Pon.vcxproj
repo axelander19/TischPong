@@ -103,14 +103,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BecherClass.cpp" />
     <ClCompile Include="ButtonClass.cpp" />
-    <ClCompile Include="SensorClass.cpp" />
+    <ClCompile Include="MatrixClass.cpp" />
+    <ClCompile Include="BecherClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BecherClass.h" />
     <ClInclude Include="ButtonClass.h" />
-    <ClInclude Include="SensorCLass.h">
+    <ClInclude Include="MatrixClass.h" />
+    <ClInclude Include="BecherClass.h">
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="__vm\.Pon.vsarduino.h" />

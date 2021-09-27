@@ -1,14 +1,21 @@
+#include "RingClass.h"
 #include "BecherClass.h"
-#include "SensorClass.h"
 #include "ButtonClass.h"
+#include "MatrixClass.h"
 
 #define AnzahlButton 2
 
 
+int PinStartButton = 2;
+int PinResetButton = 3;
+int PinMatrix = 4;
+
+
 //inits
-void initSensor();
-void initLED();
+void initBecher();
+void initRing();
 void initButton();
+void initMatrix();
 
 //Einlesen
 void SensorEinlesen();
@@ -17,20 +24,21 @@ void ButtonEinlesen();
 bool zustandBecher[AnzahlSensor];
 int LedRingID[AnzahlRinge][AnzahlLEDproRing];
 void aktAnzeige();
+void aktSpielstand();
 
 //Ausgeben
 
-void ringeAktualisieren();
+void aktRinge();
+int BecherA;                    //linke Seite
+int BecherB;                    //rechte Seite
 
-
-BecherClass Becher[AnzahlRinge];
-SensorClass Sensoren[AnzahlSensor];
+RingClass Ringe[AnzahlRinge];
+BecherClass Becher[AnzahlSensor];
 ButtonClass StartButton;
 ButtonClass ResetButton;
-
-
-int PinStartButton = 2;
-int PinResetButton = 3;
+MatrixClass AnzeigeMatrixA;
+MatrixClass AnzeigeMatrixB;
+MatrixClass AnzeigeMatrixMitte;
 
 void setup()
 {
@@ -38,10 +46,10 @@ void setup()
     
     int SensorPins[] = {0,1,2,3};       //ersten zwei sind Multiplexer
     int SourceselectPins[] = {0,1,2,3,4,5,6,7};
-    int MPPins[] = {0,1};          //Multiplexer auf analoge eing�nge ab 0 stecken
-                              
+
+
     //Sensoren Initialisieren
-    initSensor();
+    initBecher();
 
     
     //Kreise initialisieren
@@ -51,7 +59,9 @@ void setup()
     //Buttons Initialisieren
     initButton();
 
-    initLED();
+    initRing();
+
+    initMatrix();
 }
 
 
@@ -63,15 +73,21 @@ void loop()
     //Sensoren einlesen
     SensorEinlesen();
     //button einlesen
+    // 
+    // Spielstand aktualisieren
+    aktSpielstand();        //done
+    // 
     //ringeAktualisieren();
-                Becher[0].rot();
+               
+
+
     aktAnzeige();
 
         //ringe nächte led höher
 
  
 
-
+   
            
   delay(1000);
 }
@@ -81,7 +97,7 @@ void loop()
 void SensorEinlesen(){
 
     for (int i = 0; i < AnzahlSensor; i++) {
-        zustandBecher[i] = Sensoren[i].SensorLesen();
+        zustandBecher[i] = Becher[i].SensorLesen();
     }
 }
 
@@ -89,43 +105,90 @@ void ButtonEinlesen(){
   
 }
 
-void ringeAktualisieren(){
+void aktRinge(){
     for (int i = 0; i < AnzahlRinge; i++) {
-        if (zustandBecher == true) {
+        if (zustandBecher[i] = true) {
 //            Becher[i]->rot;
         }
 }}
 
+void aktSpielstand(){
+    int n = 0;
+    BecherA = 0;
+    BecherB = 0;
 
-
-void aktAnzeige(){
-int a;
+    for (int i = 0; i < AnzahlMP; i++) {
+        for (int m; m < AnzahlProMP; m++) {
+            if (Becher[n].getStatus() == true) {
+                if (i == 0) {
+                    BecherA++;
+                }
+                if (i == 1) {
+                    BecherB++;
+                }                
+            }
+            
+            n++;
+        }
+        
+    }
 }
 
-void initLED(){
-    for(int m=0; m<(AnzahlLEDproRing*AnzahlRinge); m++)
+void aktAnzeige(){
+
+}
+
+void initRing() {
+/*    for (int m = 0; m<(AnzahlLEDproRing * AnzahlRinge); m++)
     for (int i = 0; i < AnzahlRinge; i++) {
         for (int n = 0; n++; n < AnzahlLEDproRing) {
             LedRingID[i][n]=m;
         }
+    }*/
+    for (int i = 0; i < AnzahlRinge; i++) {
+        Ringe[i].init();
     }
 }
 
-void initSensor() {
-    int i = 0;
+void initBecher() {
+    int komp = 0;
+    int BecherID = 0;
     for (int Imp = 0; Imp < AnzahlMP; Imp++) {              //alle multiplexer durchgehen
-        pinMode(Imp, INPUT);
+        pinMode(firstMPPin+Imp, INPUT);
+        pinMode(firstRingPin+Imp, OUTPUT);
+        int LEDID = 0;
+
         for (int Ie; Ie < AnzahlProMP; Ie++) {              //alle eing�nge eines MP durchgehen
-            Sensoren[i].init(Imp, Ie, i);
-            i++;
+
+            Becher[BecherID].init(Imp, Ie, BecherID, LEDID);
+            LEDID = LEDID + 12;                             //Start id halben kreis weiterschieben
+            BecherID++;
+
+            if ((BecherID == 7)|| (BecherID == 12)||(BecherID == 15)) {           //Bei neuer reihe extra weiterschieben
+                LEDID = LEDID + 12;
+            }
         }
     }
-    Sensoren[i].init(0,0,AnzahlSensor-1);
-    i++;
-    Sensoren[i].init(0,0,AnzahlSensor-2);
+    
+    Becher[BecherID].init(0,0,AnzahlSensor-2,0);
+    pinMode(firstMPPin + 2, INPUT);
+    pinMode(firstRingPin + 2, OUTPUT);
+    BecherID++;
+    Becher[BecherID].init(0,0,AnzahlSensor-1,24);
+   
 }
 
 void initButton(){
   StartButton.init(PinStartButton);
   ResetButton.init(PinResetButton);
+}
+
+void initMatrix() {
+    pinMode(PinMatrix, OUTPUT);
+
+    AnzeigeMatrixA.init(PinMatrix, 0);
+    AnzeigeMatrixB.init(PinMatrix, 144);
+    AnzeigeMatrixMitte.init(PinMatrix, 80);
+
+    AnzeigeMatrixMitte.strich();
 }
