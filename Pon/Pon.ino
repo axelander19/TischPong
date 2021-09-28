@@ -1,4 +1,3 @@
-#include "RingClass.h"
 #include "BecherClass.h"
 #include "ButtonClass.h"
 #include "MatrixClass.h"
@@ -22,17 +21,15 @@ void SensorEinlesen();
 void ButtonEinlesen();
 
 bool zustandBecher[AnzahlSensor];
-int LedRingID[AnzahlRinge][AnzahlLEDproRing];
 void aktAnzeige();
 void aktSpielstand();
 
 //Ausgeben
 
 void aktRinge();
-int BecherA;                    //linke Seite
-int BecherB;                    //rechte Seite
+int Becher1;                    //linke Seite
+int Becher2;                    //rechte Seite
 
-RingClass Ringe[AnzahlRinge];
 BecherClass Becher[AnzahlSensor];
 ButtonClass StartButton;
 ButtonClass ResetButton;
@@ -106,25 +103,23 @@ void ButtonEinlesen(){
 }
 
 void aktRinge(){
-    for (int i = 0; i < AnzahlRinge; i++) {
-        if (zustandBecher[i] = true) {
-//            Becher[i]->rot;
-        }
-}}
+ 
+
+}
 
 void aktSpielstand(){
     int n = 0;
-    BecherA = 0;
-    BecherB = 0;
+    Becher1 = 0;
+    Becher2 = 0;
 
     for (int i = 0; i < AnzahlMP; i++) {
         for (int m; m < AnzahlProMP; m++) {
             if (Becher[n].getStatus() == true) {
                 if (i == 0) {
-                    BecherA++;
+                    Becher1++;
                 }
                 if (i == 1) {
-                    BecherB++;
+                    Becher2++;
                 }                
             }
             
@@ -138,17 +133,7 @@ void aktAnzeige(){
 
 }
 
-void initRing() {
-/*    for (int m = 0; m<(AnzahlLEDproRing * AnzahlRinge); m++)
-    for (int i = 0; i < AnzahlRinge; i++) {
-        for (int n = 0; n++; n < AnzahlLEDproRing) {
-            LedRingID[i][n]=m;
-        }
-    }*/
-    for (int i = 0; i < AnzahlRinge; i++) {
-        Ringe[i].init();
-    }
-}
+
 
 void initBecher() {
     int komp = 0;
