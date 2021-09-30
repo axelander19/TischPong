@@ -106,6 +106,7 @@
     <ClCompile Include="ButtonClass.cpp" />
     <ClCompile Include="MatrixClass.cpp" />
     <ClCompile Include="BecherClass.cpp" />
+    <ClCompile Include="StreifenClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonClass.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="BecherClass.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="StreifenClass.h" />
     <ClInclude Include="__vm\.Pon.vsarduino.h" />
   </ItemGroup>
   <PropertyGroup>

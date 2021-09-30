@@ -4,9 +4,6 @@
 #define AnzahlSelectMP 4
 #define AnzahlLEDproRing 24
 
-#define firstSelectPin 0
-#define firstMPPin 0
-#define firstRingPin 8
 
 #define SensorSchwellwert 500
 
@@ -20,6 +17,15 @@
 class BecherClass
 {
 private:
+	int PinfirstSelect;
+
+	int PinSensor;
+	int PinLED;
+	int PinSelect0;
+	int PinSelect1;
+	int PinSelect2;
+	int PinSelect3;
+
 	int SensorWert;
 	bool status; //true=becher da; false=beacher weg
 	
@@ -32,7 +38,7 @@ private:
 
 
 public:
-	void init(int AbschnittID, int Ie, int i, int LEDID);
+	void init(int AbschnittID, int Ie, int i, int LEDID, int pinSelect, int pinSensor, int pinLED);
 	bool SensorLesen();
 	int getID();
 	void setPin(int pin);
@@ -41,4 +47,5 @@ public:
 	void BecherWeg();
 	int getLEDPin();
 	int getSensorPin();
+	void aktualisiereFarbe();
 };

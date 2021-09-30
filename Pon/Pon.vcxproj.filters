@@ -27,6 +27,9 @@
     <ClCompile Include="MatrixClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StreifenClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BecherClass.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MatrixClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StreifenClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
