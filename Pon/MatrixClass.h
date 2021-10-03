@@ -1,4 +1,9 @@
 #pragma once
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
 
 #define Spalten 8
 #define Reihen 8
@@ -6,6 +11,21 @@
 class MatrixClass
 {
 private:
+  int IDStart;
+
+  int Pin;
+  uint32_t c=matrix.Color(255, 0, 0); // Red
+ Adafruit_NeoPixel matrix;
+
+  int matrixID[Reihen][Spalten] = {
+    {7, 6, 5, 4, 3, 2, 1, 0},
+    {8, 9, 10, 11, 12, 13, 14, 15},
+    {23, 22, 21, 20, 19, 18, 17, 16},
+    {24, 25, 26, 27, 28, 29, 30, 31},
+    {39, 38, 37, 36, 35, 34, 33, 32},
+    {40, 41, 42, 43, 44, 45, 46, 47},
+    {55, 54, 53, 52, 51, 50, 49, 48},
+    {56, 57, 58, 59, 60, 61, 62, 63} };
 	int	matrix10[Reihen][Spalten] = {
 		{0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 1, 0, 0, 1, 1, 0},
@@ -106,7 +126,6 @@ private:
 		{0, 0, 1, 0, 0, 0, 1, 0},
 		{0, 0, 0, 1, 1, 1, 0, 0} };
 
-	int IDStart;
 
 public:
 	void init(int pin,int ID);
@@ -121,7 +140,6 @@ public:
 	void drei();
 	void zwei();
 	void eins();
-	void null();
+	void nulll();
 
 };
-

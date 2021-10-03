@@ -3,13 +3,16 @@
 #include "MatrixClass.h"
 #include "StreifenClass.h"
 
+
+
+
 #define AnzahlButton 2
 
 //-------------------------Pins-------------------------------------------
 
 int PinStartButton = 7;
 int PinResetButton = 8;
-int PinMatrix0 = 6;
+int PinMatrix0 = 3;
 int PinMatrix1 = 5;
 int PinSensor = 0;
 int PinSourceselect = 22;
@@ -62,6 +65,9 @@ void setup()
         
     //Anzeige Initialisieren
     initMatrix();
+
+ 
+
 }
 
 
@@ -78,11 +84,34 @@ void loop()
     aktSpielstand();        //done
     // 
     //ringeAktualisieren();
-               
+  
 
-
-    aktAnzeige(Becher0, AnzeigeMatrix0);
-    aktAnzeige(Becher1, AnzeigeMatrix1);
+    AnzeigeMatrix0.zehn();
+delay(2000);
+    AnzeigeMatrix0.neun();
+    AnzeigeMatrix1.zehn();
+delay(2000);
+    AnzeigeMatrix1.neun();
+/*delay(1000);
+    AnzeigeMatrix0.acht();
+    delay(1000);
+    AnzeigeMatrix0.sieben();
+    delay(1000);
+    AnzeigeMatrix0.sechs();
+    delay(1000);
+    AnzeigeMatrix0.fuenf();
+    delay(1000);
+    AnzeigeMatrix0.vier();
+    delay(1000);
+    AnzeigeMatrix0.drei();
+    delay(1000);
+    AnzeigeMatrix0.zwei();
+    delay(1000);
+    AnzeigeMatrix0.eins();
+    delay(1000);
+    AnzeigeMatrix0.nulll();*/
+    //aktAnzeige(Becher0, AnzeigeMatrix0);
+  //  aktAnzeige(Becher1, AnzeigeMatrix1);
 
 
     //led einmal eine runde
@@ -146,7 +175,7 @@ void aktAnzeige(int Seite, MatrixClass Matrix){
     switch (Seite)
     {
     case 0:
-        Matrix.null();
+        Matrix.nulll();
     case 1:
         Matrix.eins();
     case 2:
@@ -210,8 +239,8 @@ void initMatrix() {
     pinMode(PinMatrix0, OUTPUT);
     pinMode(PinMatrix1, OUTPUT);
 
-    AnzeigeMatrix0.init(PinMatrix1, 0);
-    AnzeigeMatrix1.init(PinMatrix2, 0);
+    AnzeigeMatrix0.init(PinMatrix0, 0);
+    AnzeigeMatrix1.init(PinMatrix0, 64);
 
 }
 

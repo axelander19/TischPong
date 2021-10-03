@@ -25,7 +25,7 @@ bool BecherClass::SensorLesen() {
 	
 	sourceSelect();
 	
-	SensorWert = analogRead(AbschnittID+firstMPPin);
+	SensorWert = analogRead(PinSensor);
 	if (SensorWert < SensorSchwellwert) {
 		status = true;
 	}
@@ -68,12 +68,8 @@ void BecherClass::BecherWeg() {
 	StartLedID;
 }
 
-int BecherClass::getLEDPin() {
-	return (firstRingPin + AbschnittID);
-}
-int BecherClass::getSensorPin() {
-	return (firstMPPin + AbschnittID);
-}
+
+
 
 void BecherClass::aktualisiereFarbe() {
 
