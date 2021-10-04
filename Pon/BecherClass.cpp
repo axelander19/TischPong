@@ -19,6 +19,10 @@ void BecherClass::init(int Imp, int Ie, int i, int LEDID, int pinSelect, int pin
 	pinMode(PinSensor, INPUT);
 	pinMode(PinLED, OUTPUT);
 
+	RingeLED = Adafruit_NeoPixel(AnzahlLEDproRing*AnzahlSensor, PinLED, NEO_GRB + NEO_KHZ800);
+	RingeLED.begin();
+	RingeLED.setBrightness(helligkeit);
+	RingeLED.show();
 }
 
 bool BecherClass::SensorLesen() {
@@ -64,13 +68,12 @@ bool BecherClass::getStatus() {
 }
 
 void BecherClass::BecherWeg() {
-	getLEDPin();
+	
 	StartLedID;
 }
 
+void BecherClass::aktFarbe() {
+	if (status == true) {			//farbe auf grün
 
-
-
-void BecherClass::aktualisiereFarbe() {
-
+	}
 }
