@@ -1,6 +1,6 @@
 #include "ButtonClass.h"
 
-void ButtonClass::init(int pin){
+void ButtonClass::init(byte pin){
   this->Pin = pin;
   pinMode(Pin, INPUT);
 }

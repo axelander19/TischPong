@@ -1,13 +1,4 @@
-#include <Adafruit_NeoPixel.h>
-#ifdef __AVR__
-#include <avr/power.h>
-#endif
-
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include "LedClass.h"
 //------------------------------
 #define AnzahlSensor 34
 #define AnzahlMP 2
@@ -17,44 +8,34 @@
 
 #define SensorSchwellwert 500
 
-
-
-
-class BecherClass
+class BecherClass : public LedClass
 {
 private:
-	int PinfirstSelect;
-	int PinSensor;
-	int PinLED;
-	int PinSelect0;
-	int PinSelect1;
-	int PinSelect2;
-	int PinSelect3;
+	byte PinfirstSelect;
+	byte PinSensor;
+	byte PinLED;
+	byte PinSelect0;
+	byte PinSelect1;
+	byte PinSelect2;
+	byte PinSelect3;
 	
-	Adafruit_NeoPixel RingeLED;
-	uint32_t Rot = RingeLED.Color(FarbeRot[0], FarbeRot[1], FarbeRot[2]); // Red
-	uint32_t Team0 = RingeLED.Color(FarbeTeam0[0], FarbeTeam0[1], FarbeTeam0[2]);
-	uint32_t Team1 = RingeLED.Color(FarbeTeam1[0], FarbeTeam1[1], FarbeTeam1[2]);
-	uint32_t Gruen = RingeLED.Color(FarbeGruen[0], FarbeGruen[1], FarbeGruen[2]);
-
-	int SensorWert;
+	LedClass RingeLED;
+  byte Helligkeit;
+	
+	byte SensorWert;
 	bool status; //true=becher da; false=beacher weg
 	
-	int SensorID;
-	int AbschnittID;
-	int MPEingangID;
+	byte SensorID;
+	byte AbschnittID;
+	byte MPEingangID;
 
-	int LEDs[24];
-	int StartLedID;
-
+	//int LEDs[24];
+	byte StartLedID;
 
 public:
-	void init(int AbschnittID, int Ie, int i, int LEDID, int pinSelect, int pinSensor, int pinLED);
+	void init(byte AbschnittID, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED);
 	bool SensorLesen();
-	int getID();
-	void setPin(int pin);
 	void sourceSelect();
 	bool getStatus();
-	void BecherWeg();
-	void aktFarbe();
+	void aktFarbe(byte hel);
 };

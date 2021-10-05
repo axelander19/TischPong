@@ -1,4 +1,3 @@
-
 #if defined(ARDUINO) && ARDUINO >= 100
   #include "arduino.h"
 #else
@@ -9,9 +8,9 @@ class ButtonClass
 {
 private:
   bool status;
-  int Pin;
+  byte Pin;
   
 public:
-  void init(int pin);
+  void init(byte pin);
   bool lesen();
 };
