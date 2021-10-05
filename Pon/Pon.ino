@@ -6,14 +6,14 @@
   
   
 //  #include "Farben.h"
-byte helligkeit=0;
-bool Energiesparmodus;
+byte helligkeit=100;
+bool Energiesparmodus=false;
 //-------------------------Pins-------------------------------------------
 
 #define PinSensor 0
 #define PinSourceselect 22
 #define PinRinge 2
-#define PinStreifen0 0
+#define PinStreifen0 12
 #define PinStreifen1 1
 #define PinMatrix0 6
 #define PinMatrix1 5
@@ -36,7 +36,7 @@ void aktRinge();
 
 //Ausgeben
 
-byte Becher0;                    //linke Seite
+byte Becher0=10;                    //linke Seite
 byte Becher0davor = 0;
 byte Becher1;                    //rechte Seite
 byte Becher1davor = 0;
@@ -52,19 +52,20 @@ StreifenClass Streifen1;
 
 void setup()
 {
- //   Serial.begin(115200);
-   
+   Serial.begin(9600);
+   Serial.println(F("Start"));
     //Sensoren+Ringe Initialisieren
     initBecher();
 
-    //Stripes initialisieren
-
+//    Stripes initialisieren
+initStreifen();
 
     //Buttons Initialisieren
-    initButton();
+   // initButton();
         
     //Anzeige Initialisieren
-    initMatrix();     
+    //initMatrix(); 
+       
 }
 
 
@@ -73,6 +74,7 @@ void setup()
 void loop()
 {
     //button einlesen
+    /*
     ButtonEinlesen();
     if (Energiesparmodus == true) {
         helligkeit = 10;
@@ -83,32 +85,43 @@ void loop()
 
     //Sensoren einlesen
     SensorEinlesen();
- 
+
     // Spielstand aktualisieren
-    aktSpielstand();        
-    
-  
+   // aktSpielstand();  
+      
+  */    
+  Serial.print("BEcher:");
+
+  Serial.println(Becher0);
 
 
-    aktAnzeige(Becher0, AnzeigeMatrix0);
-    aktAnzeige(Becher1, AnzeigeMatrix1);
 
-    if (Becher0 < Becher0davor) {               //wenn Becher weniger als davor
+  //  aktAnzeige(Becher0, AnzeigeMatrix0);
+  //  aktAnzeige(Becher1, AnzeigeMatrix1);
+
+   /* if (Becher0 < Becher0davor) {               //wenn Becher weniger als davor
                   
         Streifen0.treffer();                    //led einmal halbe runde
-        aktRinge();                             //bei hälfte becher ring aktualisieren
+        //aktRinge();                             //bei hälfte becher ring aktualisieren
         Streifen0.treffer();                    //runde zu ende
     }
     if (Becher1 < Becher1davor) {
         Streifen1.treffer();                    //led einmal halbe runde
-        aktRinge();                             //bei hälfte becher ring aktualisieren
+        //aktRinge();                             //bei hälfte becher ring aktualisieren
         Streifen1.treffer();                    //runde zu ende
+    }*/
+
+
+    //aktRinge();
+    if(Becher0 ==10){
+      Becher0=0;
+      Becher1=0;
     }
-
-
-    aktRinge();
-
-
+Becher0--;
+Becher1++;
+if(Becher0 == 0){
+  Becher0=10;
+}
     Becher0davor = Becher0;
     Becher1davor = Becher1;
     delay(1000);
@@ -133,7 +146,9 @@ void ButtonEinlesen(){
 
 void aktRinge(){
     for (byte i = 0; i < AnzahlSensor;i++) {
+      Serial.println("aktRing");
         Becher[i].aktFarbe(helligkeit);
+        delay(1000);
     }
 
 }

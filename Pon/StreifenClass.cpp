@@ -10,13 +10,13 @@ void StreifenClass::init(byte pin, byte team) {
 
 
     //----------Teamfarbe setzen
-    byte id = 0;
+   // byte id = 0;
 
     for (byte id = 0; id < AnzahlLEDproStreifen; id++) {
         //aktivieren led
         streifen.setPixelTeam(id, Team);
         streifen.showPixel(Helligkeit);
-        
+        Serial.println("Streifeneinpiel");
         delay(100);
     }     
 }

@@ -7,7 +7,9 @@ void LedClass::init(byte pin, byte Anzahl) {
     LEDPixel = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
 
     LEDPixel.begin();
-//    LEDPixel.setBrightness(helligkeit);
+    //LEDPixel.setBrightness(Helligkeit);
+        LEDPixel.show();
+
 }
 
 void LedClass::setPixelRot(byte id) {
@@ -15,12 +17,18 @@ void LedClass::setPixelRot(byte id) {
 }
 
 void LedClass::setPixelGruen(byte id) {
-    LEDPixel.setPixelColor(id, LEDPixel.Color(0, 255, 255));
+      Serial.println("in ledclass");
+    Serial.println(Pin);
+
+    LEDPixel.setPixelColor(id, LEDPixel.Color(0, 255, 0));
 }
 
 void LedClass::setPixelTeam(byte id, byte i) { 
   if (i == 0) {
-      LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 255));
+            Serial.println("Streifeneinpiel in led");
+
+      LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 0));
+      
   }
   if (i == 1) {
       LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 255));

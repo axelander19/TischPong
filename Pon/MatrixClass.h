@@ -131,5 +131,5 @@ public:
 
 	void aktMatrix(byte Zahl, byte hel);
 
-	void schreibeMatrix(int	aktMatrix[Reihen][Spalten]);
+	void schreibeMatrix(int	aktMatrix[][8]);
 };

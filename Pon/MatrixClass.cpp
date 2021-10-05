@@ -14,8 +14,12 @@ void MatrixClass::aktMatrix(byte Zahl, byte hel){
     switch (Zahl)
     {
     case 0:
+   // Serial.println(F("aktMatrix case0"));
+    //int* zeiger = matri0
+    
         schreibeMatrix(matrix0);
-    case 1:
+      //  break;
+  /*  case 1:
         schreibeMatrix(matrix1);
     case 2:
         schreibeMatrix(matrix2);
@@ -36,26 +40,42 @@ void MatrixClass::aktMatrix(byte Zahl, byte hel){
     case 10:
         schreibeMatrix(matrix10);
     default:
-        break;
+        break;*/
     }
 }
 
-void MatrixClass::schreibeMatrix(int	aktMatrix[Reihen][Spalten]) {
+void MatrixClass::schreibeMatrix(int aktMatrix[][8]) {
     byte id = IDStart;
+   // Serial.println("SChreibemtrix case0");
 
     for (byte reihe = 0; reihe < Reihen; reihe++) {
+              Serial.println("neue Reihe");
+
         for (byte spalte = 0; spalte < Spalten; spalte++) {
+                  Serial.println(F("neue Spalte"));
+
             if (aktMatrix[reihe][spalte] == 1) {
                 //aktivieren led
-                matrix.setPixelRot(matrixID[reihe][spalte]);
-                matrix.showPixel(Helligkeit);
+                                        Serial.println(matrixID[reihe][spalte]);
+
+                //matrix.setPixelRot(matrixID[reihe][spalte]);
+               // matrix.showPixel(Helligkeit);
             }
             else {
-                matrix.setPixelTeam(matrixID[reihe][spalte], Team);            
+                matrix.setPixelTeam(matrixID[reihe][spalte], Team);
+                                matrix.showPixel(Helligkeit);
+            
             }
+                        Serial.println(spalte);
 
             id++;
-            delay(10);
+            delay(100);
         }
+                Serial.println(F("SChreibematrix case0  reihe zuende"));
+                        Serial.println(reihe);
+delay(100);
+
     }
+        Serial.println("SChreibematrix case0 zuende");
+
 }

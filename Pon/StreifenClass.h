@@ -2,7 +2,7 @@
 
 #include "LedClass.h"
 
-#define AnzahlLEDproStreifen 200
+#define AnzahlLEDproStreifen 60
 
 
 class StreifenClass

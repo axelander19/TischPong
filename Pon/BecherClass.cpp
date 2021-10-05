@@ -52,10 +52,14 @@ bool BecherClass::getStatus() {
 
 void BecherClass::aktFarbe(byte hel) {
   Helligkeit = hel;
-	if (status == true) {			//farbe auf gr�n
+	if (status == true) {			//farbe auf gruen
+  Serial.print("becher auf gruen mit led ");
+
 		for (byte i = StartLedID; i < AnzahlLEDproRing; i++) {
+			    Serial.println(i);
+
 			RingeLED.setPixelGruen(i);													//was bei überlapen?    bit für 4eraufstellung
-			showPixel(Helligkeit);
+			RingeLED.showPixel(Helligkeit);
 		}
 	}
 	if (status == false) {

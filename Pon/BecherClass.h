@@ -23,7 +23,7 @@ private:
   byte Helligkeit;
 	
 	byte SensorWert;
-	bool status; //true=becher da; false=beacher weg
+	bool status=true; //true=becher da; false=beacher weg
 	
 	byte SensorID;
 	byte AbschnittID;
