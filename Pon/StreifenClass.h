@@ -1,19 +1,24 @@
 #pragma once
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include "LedClass.h"
 
-#define AnzahlLED
+#define AnzahlLEDproStreifen 200
+
 
 class StreifenClass
 {
 private:
-	int Pin;
+	byte Team;
+	byte Pin;
+	byte aktID = 0;
+	
+	byte divider = 2;
 
+	LedClass streifen;
+	byte Helligkeit = 0;
+ 
 public:
-	void init(int pin);
+	void init(byte pin, byte team);
+	//int *TeamColour();
+	void treffer();
 };
-

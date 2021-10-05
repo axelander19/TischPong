@@ -1,6 +1,37 @@
 #include "StreifenClass.h"
 
-void StreifenClass::init(int pin) {
+
+void StreifenClass::init(byte pin, byte team) {
 	this->Pin = pin;
-	pinMode(pin, OUTPUT);
+	this->Team = team;
+
+    //---------streifen initialisieren
+    streifen.init(Pin, AnzahlLEDproStreifen);
+
+
+    //----------Teamfarbe setzen
+    byte id = 0;
+
+    for (byte id = 0; id < AnzahlLEDproStreifen; id++) {
+        //aktivieren led
+        streifen.setPixelTeam(id, Team);
+        streifen.showPixel(Helligkeit);
+        
+        delay(100);
+    }     
+}
+
+void StreifenClass::treffer() {
+    for (byte i = aktID; aktID < AnzahlLEDproStreifen / divider; aktID++){
+        streifen.setPixelTeam(aktID, Team);
+        streifen.setPixelGruen(aktID+1);
+        streifen.showPixel(Helligkeit);
+        delay(10);
+    }
+    divider = 1;
+    if (aktID == AnzahlLEDproStreifen - 1)
+    {
+        aktID = 0;
+        divider = 2;
+    }
 }

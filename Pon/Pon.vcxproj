@@ -104,12 +104,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonClass.cpp" />
+    <ClCompile Include="LedClass.cpp" />
     <ClCompile Include="MatrixClass.cpp" />
     <ClCompile Include="BecherClass.cpp" />
     <ClCompile Include="StreifenClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonClass.h" />
+    <ClInclude Include="LedClass.h" />
     <ClInclude Include="MatrixClass.h" />
     <ClInclude Include="BecherClass.h">
       <FileType>CppCode</FileType>
