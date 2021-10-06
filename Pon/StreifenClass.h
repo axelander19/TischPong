@@ -1,6 +1,16 @@
 #pragma once
+#ifndef _StreifenClass_h
+#define _StreifenClass_h
 
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "arduino.h"
+#else
+#include "WProgram.h"
+
+#endif
 #include "LedClass.h"
+
+
 
 #define AnzahlLEDproStreifen 60
 
@@ -22,3 +32,4 @@ public:
 	//int *TeamColour();
 	void treffer();
 };
+#endif

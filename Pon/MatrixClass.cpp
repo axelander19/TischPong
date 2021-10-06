@@ -4,7 +4,7 @@ void MatrixClass::init(byte pin, byte team) {
 	this->Team = team;
     this->Pin = pin;
 	
-    matrix.init(Pin, (Reihen * Spalten));
+    matrix.Init(Pin, (Reihen * Spalten));
     matrix.showPixel(Helligkeit);
 }
 
@@ -19,7 +19,7 @@ void MatrixClass::aktMatrix(byte Zahl, byte hel){
     
         schreibeMatrix(matrix0);
       //  break;
-  /*  case 1:
+    case 1:
         schreibeMatrix(matrix1);
     case 2:
         schreibeMatrix(matrix2);
@@ -40,7 +40,7 @@ void MatrixClass::aktMatrix(byte Zahl, byte hel){
     case 10:
         schreibeMatrix(matrix10);
     default:
-        break;*/
+        break;
     }
 }
 
@@ -49,33 +49,33 @@ void MatrixClass::schreibeMatrix(int aktMatrix[][8]) {
    // Serial.println("SChreibemtrix case0");
 
     for (byte reihe = 0; reihe < Reihen; reihe++) {
-              Serial.println("neue Reihe");
+             // Serial.println("neue Reihe");
 
         for (byte spalte = 0; spalte < Spalten; spalte++) {
-                  Serial.println(F("neue Spalte"));
+              //    Serial.println(F("neue Spalte"));
 
             if (aktMatrix[reihe][spalte] == 1) {
                 //aktivieren led
-                                        Serial.println(matrixID[reihe][spalte]);
+                              //          Serial.println(matrixID[reihe][spalte]);
 
-                //matrix.setPixelRot(matrixID[reihe][spalte]);
+                matrix.setPixelRot(matrixID[reihe][spalte]);
                // matrix.showPixel(Helligkeit);
             }
             else {
                 matrix.setPixelTeam(matrixID[reihe][spalte], Team);
-                                matrix.showPixel(Helligkeit);
+                              //  matrix.showPixel(Helligkeit);
             
             }
-                        Serial.println(spalte);
+                        //Serial.println(spalte);
 
             id++;
-            delay(100);
+            delay(1);
         }
-                Serial.println(F("SChreibematrix case0  reihe zuende"));
-                        Serial.println(reihe);
-delay(100);
+               // Serial.println(F("SChreibematrix case0  reihe zuende"));
+                    //    Serial.println(reihe);
+delay(10);
 
     }
-        Serial.println("SChreibematrix case0 zuende");
+       // Serial.println("SChreibematrix case0 zuende");
 
 }

@@ -6,7 +6,7 @@ void StreifenClass::init(byte pin, byte team) {
 	this->Team = team;
 
     //---------streifen initialisieren
-    streifen.init(Pin, AnzahlLEDproStreifen);
+    streifen.Init(Pin, AnzahlLEDproStreifen);
 
 
     //----------Teamfarbe setzen
