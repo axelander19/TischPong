@@ -65,7 +65,7 @@ void BecherClass::aktFarbe(byte hel) {
 	if (status == false) {
 		for (byte i = StartLedID; i < AnzahlLEDproRing; i++) {
 			RingeLED.setPixelRot(i);													//was bei überlapen?    bit für 4eraufstellung
-			showPixel(Helligkeit);
+			RingeLED.showPixel(Helligkeit);
 		}
 	}
 }

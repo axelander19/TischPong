@@ -4,7 +4,7 @@ void MatrixClass::init(byte pin, byte team) {
 	this->Team = team;
     this->Pin = pin;
 	
-    matrix.init(Pin, Reihen * Spalten);
+    matrix.init(Pin, (Reihen * Spalten));
     matrix.showPixel(Helligkeit);
 }
 

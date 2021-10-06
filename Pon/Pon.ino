@@ -207,7 +207,6 @@ void initBecher() {
 
     BecherID++;
     Becher[BecherID].init(4,0,AnzahlSensor-1,24, PinSourceselect, PinSensor, PinRinge);
-
 }
 
 void initButton(){
