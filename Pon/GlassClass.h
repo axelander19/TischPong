@@ -13,6 +13,7 @@
 
 #endif
 #include "LedClass.h"
+#include "leds.h"
 
 
 //------------------------------
@@ -54,6 +55,8 @@ public:
 	void sourceSelect();
 	bool getStatus();
 	void aktFarbe(byte hel);
+
+	void setStatus(bool Status);
 };
 
 

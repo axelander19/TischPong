@@ -10,7 +10,7 @@ void GlassClass::init(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byt
 	this->AbschnittID = Imp;
 	this->MPEingangID = Ie;
 	this->SensorID = i;
-	Serial.println(PinLED);
+	//Serial.println(PinLED);
 
 	PinfirstSelect = pinSelect + AbschnittID * 4;
 	PinSelect0 = pinSelect + (AbschnittID * 4);
@@ -20,11 +20,11 @@ void GlassClass::init(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byt
 
 	this->PinLED = pinLED + AbschnittID;
 	this->PinSensor = pinSensor + AbschnittID;
-	Serial.println(PinLED);
+	//Serial.println(PinLED);
 
 	pinMode(PinSensor, INPUT);
 
-	RingeLED.Init(PinLED, AnzahlLEDproRing);
+	//RingeLED.Init(PinLED, AnzahlLEDproRing);
 }
 
 bool GlassClass::SensorLesen() {
@@ -60,22 +60,34 @@ bool GlassClass::getStatus() {
 void GlassClass::aktFarbe(byte hel) {
 	Helligkeit = hel;
 	if (status == true) {			//farbe auf gruen
-		Serial.print(F("becher auf gruen mit led "));
+		//Serial.print(F("becher auf gruen mit led "));
 
 		for (byte i = StartLedID; i < AnzahlLEDproRing; i++) {
-			Serial.println(PinLED);
+			//Serial.println(PinLED);
+			RingLeds.setPixelColor(i, RingLeds.Color(0, 255, 0));
+			
+			//RingeLED.setPixelGruen(i);													//was bei überlapen?    bit für 4eraufstellung
+			//RingeLED.showPixel(Helligkeit);
+			RingLeds.show();
 
-			RingeLED.setPixelGruen(i);													//was bei überlapen?    bit für 4eraufstellung
-			RingeLED.showPixel(Helligkeit);
 		}
 	}
 	if (status == false) {
 		for (byte i = StartLedID; i < AnzahlLEDproRing; i++) {
-			RingeLED.setPixelRot(i);													//was bei überlapen?    bit für 4eraufstellung
-			RingeLED.showPixel(Helligkeit);
+			RingLeds.setPixelColor(i, RingLeds.Color(255, 0, 0));
+
+			//RingeLED.setPixelRot(i);													//was bei überlapen?    bit für 4eraufstellung
+			//RingeLED.showPixel(Helligkeit);
 		}
+		
+
 	}
 	delay(100);
 }
 
 
+
+void GlassClass::setStatus(bool Status) {
+	this->status = Status;
+
+}

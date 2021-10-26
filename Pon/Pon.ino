@@ -1,24 +1,30 @@
-#include "GlassClass.h"
-//#include "BecherClass.h"
 #include "ButtonClass.h"
 #include "MatrixClass.h"
 #include "StreifenClass.h"
-
+#include "GlassClass.h"
+#include "leds.h"
   
   
 //  #include "Farben.h"
-byte helligkeit=20;
+byte helligkeit=10;
 bool Energiesparmodus=false;
 //-------------------------Pins-------------------------------------------
 
 #define PinSensoren 0
 #define PinSourceselect 22
-#define PinRinge 3
+#define PinRinge 10
 #define PinStreifen0 12
 #define PinStreifen1 1
 #define PinMatrix0 6
-#define PinMatrix1 5
+#define PinMatrix1 9
 #define PinSchalter 10
+
+
+//RingLeds.setPixelColor(0, RingLeds.Color(0, 255, 0));
+
+//RingLeds.begin();
+//LEDPixel.setBrightness(10);
+//RingLeds.show();
 
 //inits
 void initBecher();
@@ -56,17 +62,18 @@ void setup()
    Serial.begin(9600);
    Serial.println(F("Start"));
     //Sensoren+Ringe Initialisieren
-   // initBecher();
+    initBecher();
 
 //    Stripes initialisieren
 //initStreifen();
 
     //Buttons Initialisieren
-   // initButton();
+   initButton();
         
     //Anzeige Initialisieren
-    initMatrix(); 
-       
+  //  initMatrix(); 
+   RingLeds.begin();
+
 }
 
 
@@ -92,11 +99,12 @@ void loop()
       
   */    
   
+    RingLeds.setPixelColor(0, RingLeds.Color(0, 255, 0));
 
 
 
-    aktAnzeige(Becher0, AnzeigeMatrix0);
-  //  aktAnzeige(Becher1, AnzeigeMatrix1);
+   // aktAnzeige(Becher1, AnzeigeMatrix1);
+    //aktAnzeige(Becher0, AnzeigeMatrix0);
 
    /* if (Becher0 < Becher0davor) {               //wenn Becher weniger als davor
                   
@@ -111,17 +119,22 @@ void loop()
     }*/
 
 
-    //aktRinge();
+    aktRinge();
     if(Becher0 ==11){
       Becher0=0;
       Becher1=0;
     }
 Becher0++;
 Becher1++;
-
+if (Becher[0].getStatus() == true) {
+    Becher[0].setStatus(false);
+}
+else { Becher[0].setStatus(true); }
+Becher[1].setStatus(false);
+    
     Becher0davor = Becher0;
     Becher1davor = Becher1;
-    delay(500);
+    delay(1000);
 }
 
 
@@ -145,7 +158,7 @@ void aktRinge(){
     for (byte i = 0; i < AnzahlSensor;i++) {
       //Serial.println("aktRing");
         Becher[i].aktFarbe(helligkeit);
-        delay(1000);
+        delay(0);
     }
 
 }

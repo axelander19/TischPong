@@ -33,6 +33,9 @@
     <ClCompile Include="GlassClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="leds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Pon.vsarduino.h">
@@ -51,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlassClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="leds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,8 @@ void MatrixClass::init(byte pin, byte team) {
     this->Pin = pin;
 	
     matrix.Init(Pin, (Reihen * Spalten));
+
+
     matrix.showPixel(Helligkeit);
 }
 
@@ -13,32 +15,39 @@ void MatrixClass::aktMatrix(byte Zahl, byte hel){
   
     switch (Zahl)
     {
-    case 0:
-   // Serial.println(F("aktMatrix case0"));
-    //int* zeiger = matri0
-    
+    case 0:    
         schreibeMatrix(matrix0);
-      //  break;
+        break;
     case 1:
         schreibeMatrix(matrix1);
+        break;
     case 2:
         schreibeMatrix(matrix2);
+        break;
     case 3:
         schreibeMatrix(matrix3);
+        break;
     case 4:
         schreibeMatrix(matrix4);
+        break;
     case 5:
         schreibeMatrix(matrix5);
+        break;
     case 6:
         schreibeMatrix(matrix6);
+        break;
     case 7:
         schreibeMatrix(matrix7);
+        break;
     case 8:
         schreibeMatrix(matrix8);
+        break;
     case 9:
         schreibeMatrix(matrix9);
+        break;
     case 10:
         schreibeMatrix(matrix10);
+        break;
     default:
         break;
     }
@@ -52,7 +61,6 @@ void MatrixClass::schreibeMatrix(int aktMatrix[][8]) {
              // Serial.println("neue Reihe");
 
         for (byte spalte = 0; spalte < Spalten; spalte++) {
-              //    Serial.println(F("neue Spalte"));
 
             if (aktMatrix[reihe][spalte] == 1) {
                 //aktivieren led

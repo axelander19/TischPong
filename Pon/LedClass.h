@@ -22,6 +22,12 @@
 
 class LedClass
 {
+private:
+	byte Pin;
+	byte Team;
+
+	 Adafruit_NeoPixel LEDPixel;
+
 public:
 	void Init(byte pin, byte Anzahl);
 	void setPixelTeam(byte id, byte i);
@@ -31,16 +37,27 @@ public:
 	void showPixel(byte Helligkeit);
 
 
-private:
-	byte Pin;
-	byte Team;
+	/*LedClass(byte pin, byte Anzahl):
+		LEDPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800){}*/
+	
+	
+	/*/
+	
+	{
+	this->Pin = pin;
+	pinMode(Pin, OUTPUT);
+	Serial.println(pin);
 
-	Adafruit_NeoPixel LEDPixel;
+	LEDPixel = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
+	LEDPixel.setPixelColor(0, LEDPixel.Color(0, 255, 0));
 
-/*
-  int FarbeTeam0[3] = { 255,264,248 };
-  int FarbeTeam1[3] = { 255,264,248 };
-  int FarbeRot[3] = { 255,0,0 };
-  int FarbeGruen[3] = { 0,255,0 };*/
+	LEDPixel.begin();
+	//LEDPixel.setBrightness(10);
+	 LEDPixel.show();
+
+}*/
+
+
+
 };
 #endif

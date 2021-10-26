@@ -137,6 +137,7 @@ private:
 		{0, 0, 1, 0, 0, 0, 1, 0},
 		{0, 0, 0, 1, 1, 1, 0, 0} };
 
+	void schreibeMatrix(int	aktMatrix[][8]);
 
 
 public:
@@ -144,6 +145,5 @@ public:
 
 	void aktMatrix(byte Zahl, byte hel);
 
-	void schreibeMatrix(int	aktMatrix[][8]);
 };
 #endif

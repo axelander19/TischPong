@@ -106,13 +106,22 @@
     <ClCompile Include="ButtonClass.cpp" />
     <ClCompile Include="GlassClass.cpp" />
     <ClCompile Include="LedClass.cpp" />
+    <ClCompile Include="leds.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MatrixClass.cpp" />
     <ClCompile Include="StreifenClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonClass.h" />
     <ClInclude Include="GlassClass.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="LedClass.h" />
+    <ClInclude Include="leds.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MatrixClass.h" />
     <ClInclude Include="StreifenClass.h" />
     <ClInclude Include="__vm\.Pon.vsarduino.h" />
