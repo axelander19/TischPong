@@ -13,7 +13,7 @@
 
 #include "LedClass.h"
 
-
+/*
 LedClass::LedClass(byte pin, byte Anzahl) {
     this->Pin = pin;
     pinMode(Pin, OUTPUT);
@@ -26,9 +26,9 @@ LedClass::LedClass(byte pin, byte Anzahl) {
     //LEDPixel.setBrightness(10);
     LEDPixel.show();
 }
+*/
 
-
-/*void LedClass::Init(byte pin, byte Anzahl) {
+void LedClass::Init(byte pin, byte Anzahl) {
 	this->Pin = pin;
     pinMode(Pin, OUTPUT);
     Serial.println(pin);
@@ -40,7 +40,7 @@ LedClass::LedClass(byte pin, byte Anzahl) {
     //LEDPixel.setBrightness(10);
      LEDPixel.show();
 
-}*/
+}
 
 void LedClass::setPixelRot(byte id) {
     LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 0));
@@ -56,18 +56,16 @@ void LedClass::setPixelsRot(byte startid, byte laenge) {
 }
 
 void LedClass::setPixelGruen(byte id) {
-      Serial.println("in ledclass guen pin: und id");
-    Serial.println(Pin);
-    Serial.println(id);
-
+      
     LEDPixel.setPixelColor(id, LEDPixel.Color(0, 255, 0));
-    LEDPixel.begin();
+    //LEDPixel.begin();
 
     LEDPixel.show();
 
 }
 
 void LedClass::setPixelsGruen(byte startid, byte laenge) {
+    Serial.println(Pin);
     for (int i = 0; i < laenge; i++) {
         setPixelGruen(startid + i);
         delay(100);
@@ -76,7 +74,6 @@ void LedClass::setPixelsGruen(byte startid, byte laenge) {
 
 void LedClass::setPixelTeam(byte id, byte i) { 
   if (i == 0) {
-            Serial.println("Streifeneinpiel in led");
 
       LEDPixel.setPixelColor(id, LEDPixel.Color(10, 10, 10));
       //LEDPixel.begin();

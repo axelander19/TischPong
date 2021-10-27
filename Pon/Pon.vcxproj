@@ -103,8 +103,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BecherClass.cpp" />
     <ClCompile Include="ButtonClass.cpp" />
-    <ClCompile Include="GlassClass.cpp" />
     <ClCompile Include="LedClass.cpp" />
     <ClCompile Include="leds.cpp">
       <SubType>
@@ -114,8 +114,8 @@
     <ClCompile Include="StreifenClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BecherClass.h" />
     <ClInclude Include="ButtonClass.h" />
-    <ClInclude Include="GlassClass.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="LedClass.h" />
     <ClInclude Include="leds.h">

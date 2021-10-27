@@ -30,7 +30,7 @@ private:
 
 public:
 
-	LedClass(byte pin, byte Anzahl);
+	//LedClass(byte pin, byte Anzahl);
 	void Init(byte pin, byte Anzahl);
 	void setPixelTeam(byte id, byte i);
 	void setPixelRot(byte id);

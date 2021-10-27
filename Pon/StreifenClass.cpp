@@ -16,7 +16,7 @@ void StreifenClass::init(byte pin, byte team) {
         //aktivieren led
         streifen.setPixelTeam(id, Team);
         streifen.showPixel(Helligkeit);
-        Serial.println("Streifeneinpiel");
+        //Serial.println("Streifeneinpiel");
         delay(100);
     }     
 }

@@ -30,10 +30,10 @@
     <ClCompile Include="LedClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GlassClass.cpp">
+    <ClCompile Include="leds.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="leds.cpp">
+    <ClCompile Include="BecherClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +53,13 @@
     <ClInclude Include="LedClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlassClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="leds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BecherClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
