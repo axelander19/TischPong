@@ -23,7 +23,7 @@
 #define AnzahlSelectMP 4
 #define AnzahlLEDproRing 24
 
-#define SensorSchwellwert 500
+//#define SensorSchwellwert 500
 
 class GlassClass
 {
@@ -50,6 +50,7 @@ private:
 	byte StartLedID;
 
 public:
+	GlassClass(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED);
 	void init(byte AbschnittID, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED);
 	bool SensorLesen();
 	void sourceSelect();

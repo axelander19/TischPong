@@ -3,9 +3,7 @@
 // 
 
 #include "GlassClass.h"
-
-
-void GlassClass::init(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED) {
+GlassClass::GlassClass(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED) {
 	StartLedID = LEDID;
 	this->AbschnittID = Imp;
 	this->MPEingangID = Ie;
@@ -26,6 +24,28 @@ void GlassClass::init(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byt
 
 	//RingeLED.Init(PinLED, AnzahlLEDproRing);
 }
+
+/*void GlassClass::init(byte Imp, byte Ie, byte i, byte LEDID, byte pinSelect, byte pinSensor, byte pinLED) {
+	StartLedID = LEDID;
+	this->AbschnittID = Imp;
+	this->MPEingangID = Ie;
+	this->SensorID = i;
+	//Serial.println(PinLED);
+
+	PinfirstSelect = pinSelect + AbschnittID * 4;
+	PinSelect0 = pinSelect + (AbschnittID * 4);
+	PinSelect1 = pinSelect + 1 + (AbschnittID * 4);
+	PinSelect2 = pinSelect + 2 + (AbschnittID * 4);
+	PinSelect3 = pinSelect + 3 + (AbschnittID * 4);
+
+	this->PinLED = pinLED + AbschnittID;
+	this->PinSensor = pinSensor + AbschnittID;
+	//Serial.println(PinLED);
+
+	pinMode(PinSensor, INPUT);
+
+	//RingeLED.Init(PinLED, AnzahlLEDproRing);
+}*/
 
 bool GlassClass::SensorLesen() {
 

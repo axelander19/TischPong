@@ -13,7 +13,22 @@
 
 #include "LedClass.h"
 
-void LedClass::Init(byte pin, byte Anzahl) {
+
+LedClass::LedClass(byte pin, byte Anzahl) {
+    this->Pin = pin;
+    pinMode(Pin, OUTPUT);
+    Serial.println(pin);
+
+    LEDPixel = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
+    LEDPixel.setPixelColor(0, LEDPixel.Color(0, 255, 0));
+
+    LEDPixel.begin();
+    //LEDPixel.setBrightness(10);
+    LEDPixel.show();
+}
+
+
+/*void LedClass::Init(byte pin, byte Anzahl) {
 	this->Pin = pin;
     pinMode(Pin, OUTPUT);
     Serial.println(pin);
@@ -25,12 +40,19 @@ void LedClass::Init(byte pin, byte Anzahl) {
     //LEDPixel.setBrightness(10);
      LEDPixel.show();
 
-}
+}*/
 
 void LedClass::setPixelRot(byte id) {
     LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 0));
   //  LEDPixel.begin();
 
+}
+
+void LedClass::setPixelsRot(byte startid, byte laenge) {
+    for (int i = 0; i < laenge; i++) {
+        setPixelRot(startid + i);
+        delay(100);
+    }
 }
 
 void LedClass::setPixelGruen(byte id) {
@@ -43,6 +65,13 @@ void LedClass::setPixelGruen(byte id) {
 
     LEDPixel.show();
 
+}
+
+void LedClass::setPixelsGruen(byte startid, byte laenge) {
+    for (int i = 0; i < laenge; i++) {
+        setPixelGruen(startid + i);
+        delay(100);
+    }
 }
 
 void LedClass::setPixelTeam(byte id, byte i) { 

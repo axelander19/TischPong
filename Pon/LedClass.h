@@ -29,10 +29,17 @@ private:
 	 Adafruit_NeoPixel LEDPixel;
 
 public:
+
+	LedClass(byte pin, byte Anzahl);
 	void Init(byte pin, byte Anzahl);
 	void setPixelTeam(byte id, byte i);
 	void setPixelRot(byte id);
 	void setPixelGruen(byte id);
+	void setPixelsRot(byte startid, byte laenge);
+	void setPixelsGruen(byte startid, byte laenge);
+
+
+
 
 	void showPixel(byte Helligkeit);
 
