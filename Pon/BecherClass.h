@@ -8,6 +8,10 @@
 class BecherClass
 {
 private:
+	int Helligkeit;
+	bool EnergieStatus;
+  byte Team;
+
 	int PinLed;
 	int PinSensor;
 	byte PinSelect0;
@@ -27,13 +31,11 @@ private:
 	void SourceSelect(int sensorid);
 
 public:
-	//BecherClass(bool team, int pinLed, int pinSensor);
+	BecherClass(bool team, int pinLed, int pinSensor);
 	void init(bool team, int pinLed, int pinSensor);
 	void AktRinge();
 	void ReadSensor();
-	void setStatus(int status, int id) {
-		Status[id] = status;
-
-	}
+	void setStatus(int status, int id);
+	bool getStatus(int id);
+	void setModus(int hel, bool sparmodus);
 };
-

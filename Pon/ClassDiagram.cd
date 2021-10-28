@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BecherClass" Collapsed="true">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAIEAABIAgAAAAAAKAAAAAAABEIAAAAAAAAAAnw=</HashCode>
+      <FileName>BecherClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonClass" Collapsed="true">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAACAAAAAAAAAAIAAEAAAAAAAAA=</HashCode>
+      <FileName>ButtonClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LedClass">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAABAACgAAAAABIAAAAEAACAACAAAA=</HashCode>
+      <FileName>LedClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatrixClass">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAABAAAAAEAD/MCAAAAAAABIAEQAAAgAAAAA=</HashCode>
+      <FileName>MatrixClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StreifenClass">
+    <Position X="5.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABSAAAAAAACBAAAAAAAAAIAFAAAAAAAAAA=</HashCode>
+      <FileName>StreifenClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="__builtin_va_list" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>__vm\.Pon.vsarduino.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="div_t" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>__vm\.Pon.vsarduino.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ldiv_t" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>__vm\.Pon.vsarduino.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

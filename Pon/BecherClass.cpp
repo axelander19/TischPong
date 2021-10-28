@@ -2,6 +2,7 @@
 
 void BecherClass::init(bool team, int pinLed, int pinSensor) {
 
+  this->Team = team;
 	this->PinSensor = pinSensor;
 	this->PinLed = pinLed;
 
@@ -27,17 +28,17 @@ void BecherClass::init(bool team, int pinLed, int pinSensor) {
 		SensorID[i] = i;
 		StartLedID[i] = aktStartid;
 
-		if ((aktStartid == 7) || (aktStartid == 12) || (aktStartid == 15)) {           //Bei neuer reihe extra weiterschieben
+		if ((aktStartid == 7) || (aktStartid == 12) || (aktStartid == 15)) {		      //Bei neuer reihe extra weiterschieben
 			aktStartid = aktStartid + 12;
 		}
 	}
 
 	SensorSchwellwert = SumSensor / (AnzahlPositionen + 1);
 
-	LED.Init(pinLed, AnzahlLEDproRing * 11);
+	LED.Init(pinLed, AnzahlLEDproRing * 11, Team);
 
 }
-/*
+
 BecherClass::BecherClass(bool team, int pinLed, int pinSensor) {
 	
 	this->PinSensor = pinSensor;
@@ -49,11 +50,10 @@ BecherClass::BecherClass(bool team, int pinLed, int pinSensor) {
 	pinMode(PinSelect2, OUTPUT);
 	pinMode(PinSelect3, OUTPUT);
 
-	int medianSensor;
 	int SumSensor = 0;
 
 	int aktStartid = 0;
-	for (int i = 0;i < AnzahlPositionen+1; i++) {
+	for (byte i = 0;i < AnzahlPositionen+1; i++) {
 		
 		SourceSelect(i);
 		int SensorSig = analogRead(PinSensor);
@@ -72,12 +72,12 @@ BecherClass::BecherClass(bool team, int pinLed, int pinSensor) {
 
 	SensorSchwellwert = SumSensor / (AnzahlPositionen + 1);
 
-	LED.Init(pinLed, AnzahlLEDproRing*11);
+	LED.Init(pinLed, AnzahlLEDproRing*11, Team);
 
-}*/
+}
 
 void BecherClass::ReadSensor() {
-	for (int i; i < AnzahlPositionen; i++) {
+	for (byte i = 0; i < AnzahlPositionen; i++) {
 
 		SourceSelect(i);	
 		int SensorSig = analogRead(PinSensor);
@@ -92,7 +92,7 @@ void BecherClass::ReadSensor() {
 
 void BecherClass::AktRinge() {
 	
-	for (int i; i < AnzahlPositionen; i++) {
+	for (byte i=0; i < AnzahlPositionen; i++) {
 		bool failure = false;
 
 		if (Status[i] == true) {
@@ -100,7 +100,7 @@ void BecherClass::AktRinge() {
 		}
 		else {
 			if ((Status[i - 1] == true)&&(StartLedID[i] == StartLedID[i-1]+12)){
-																							//schreibe erst ab der hälfte auf rot
+																							//schreibe erst ab der hï¿½lfte auf rot
 				LED.setPixelsRot(StartLedID[i]+12, AnzahlLEDproRing -12);
 				failure = true;
 			}
@@ -121,4 +121,22 @@ void BecherClass::SourceSelect(int sensorid) {
 	digitalWrite(PinSelect1, E1);
 	digitalWrite(PinSelect2, E2);
 	digitalWrite(PinSelect3, E3);
+}
+
+void BecherClass::setStatus(int status, int id) {
+	Status[id] = status;
+
+}
+
+bool BecherClass::getStatus(int id) {
+	return Status[id];
+}
+
+
+void BecherClass::setModus(int hel, bool sparmodus) {
+
+	
+	this->Helligkeit = hel;
+	this->EnergieStatus = sparmodus;
+
 }
