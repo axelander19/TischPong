@@ -144,6 +144,7 @@ public:
 	void init(byte pin, byte Team);
 
 	void aktMatrix(byte Zahl, byte hel);
+	void setModus(int hel, bool sparmodus);
 
 };
 #endif

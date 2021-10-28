@@ -14,8 +14,8 @@ void StreifenClass::init(byte pin, byte team) {
 
     for (byte id = 0; id < AnzahlLEDproStreifen; id++) {
         //aktivieren led
-        streifen.setPixelTeam(id, Team);
-        streifen.showPixel(Helligkeit);
+        streifen.setPixelTeam(id);
+        streifen.showPixel();
         //Serial.println("Streifeneinpiel");
         delay(100);
     }     
@@ -23,9 +23,9 @@ void StreifenClass::init(byte pin, byte team) {
 
 void StreifenClass::treffer() {
     for (byte i = aktID; aktID < AnzahlLEDproStreifen / divider; aktID++){
-        streifen.setPixelTeam(aktID, Team);
+        streifen.setPixelTeam(aktID);
         streifen.setPixelGruen(aktID+1);
-        streifen.showPixel(Helligkeit);
+        streifen.showPixel();
         delay(10);
     }
     divider = 1;
@@ -35,3 +35,7 @@ void StreifenClass::treffer() {
         divider = 2;
     }
 }
+
+  void StreifenClass::setModus(int hel, bool sparmodus){
+    
+  }

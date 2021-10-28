@@ -31,5 +31,7 @@ public:
 	void init(byte pin, byte team);
 	//int *TeamColour();
 	void treffer();
+	void setModus(int hel, bool sparmodus);
+
 };
 #endif

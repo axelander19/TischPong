@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Pon.ino" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonClass.cpp">
@@ -28,9 +29,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LedClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="leds.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BecherClass.cpp">
@@ -54,9 +52,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="leds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BecherClass.h">

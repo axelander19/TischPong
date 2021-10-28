@@ -3,7 +3,9 @@
 #include "StreifenClass.h"
 //#include "leds.h"
 #include "BecherClass.h"
-  
+#include <Wire.h>
+
+
 //  #include "Farben.h"
 byte helligkeit=10;
 bool Energiesparmodus=false;
@@ -18,12 +20,11 @@ bool Energiesparmodus=false;
 #define PinMatrix1 9
 #define PinSchalter 1
 
+#define NormaleHelligkeit 100
+#define SparmodusHelligkeit 10
 
-//RingLeds.setPixelColor(0, RingLeds.Color(0, 255, 0));
+#define AnzahlPositionen 15
 
-//RingLeds.begin();
-//LEDPixel.setBrightness(10);
-//RingLeds.show();
 
 //inits
 //void initBecher();
@@ -37,8 +38,9 @@ void ButtonEinlesen();
 
 //bool zustandBecher[AnzahlSensor];
 void aktAnzeige(byte Anzahlbecher, MatrixClass Matrix);
-//void aktSpielstand();
-//void aktRinge();
+void aktSpielstand();
+void aktRinge();
+void aktModus();
 
 //Ausgeben
 
@@ -48,9 +50,10 @@ byte BecherCount1;                    //rechte Seite
 byte Becher1davor = 0;
 
 //GlassClass Becher[AnzahlSensor];
-//BecherClass Becher0(0, PinRinge0, PinSensoren0);
-BecherClass Becher0;
-
+BecherClass Becher0(0, PinRinge0, PinSensoren0);
+//BecherClass Becher0;
+//BecherClass Becher1;
+BecherClass Becher1(0, PinRinge0, PinSensoren0);
 ButtonClass EnergieButton;
 MatrixClass AnzeigeMatrix0;
 MatrixClass AnzeigeMatrix1;
@@ -62,11 +65,13 @@ int temp = 0;
 
 void setup()
 {
+   //Wire.begin();        // join i2c bus (address optional for master)
+
    Serial.begin(9600);
   // Serial.println(F("Start"));
     //Sensoren+Ringe Initialisieren
     //initBecher();
-   Becher0.init(0, PinRinge0, PinSensoren0);
+  // Becher0.init(0, PinRinge0, PinSensoren0);
 //    Stripes initialisieren
 //initStreifen();
 
@@ -75,7 +80,6 @@ void setup()
         
     //Anzeige Initialisieren
   //  initMatrix(); 
-   //RingLeds.begin();
 
 }
 
@@ -84,25 +88,21 @@ void setup()
 
 void loop()
 {
-    //button einlesen
-    /*
-    ButtonEinlesen();
-    if (Energiesparmodus == true) {
-        helligkeit = 10;
-    }
-    else {
-        helligkeit = 50;
-    }
+    //----------------------------------//
+    ButtonEinlesen();                   //
+                                        //--Stromsparmodus                    Hellikeit und status energiesparen wird an klassen gegeben
+    aktModus();                         //                                 
+    //----------------------------------//
+    
 
-    //Sensoren einlesen
+        // Sensoren einlesen
     SensorEinlesen();
 
-    // Spielstand aktualisieren
-   // aktSpielstand();  
+        // Spielstand aktualisieren
+    aktSpielstand();  
       
-  */    
+      
   
-   // RingLeds.setPixelColor(0, RingLeds.Color(0, 255, 0));
 
 
 
@@ -121,15 +121,14 @@ void loop()
         Streifen1.treffer();                    //runde zu ende
     }*/
   Serial.print("main");
-    Becher0.ReadSensor();
+
 Becher0.setStatus(true, 1);
     Becher0.setStatus(true, 0);
 
-    Becher0.AktRinge();
     if (temp == 1) {
         temp = 0;
     }
-    //aktRinge();
+    aktRinge();
     /*
     if(BecherCount0 ==11){
       BecherCount0=0;
@@ -150,14 +149,14 @@ Becher[1].setStatus(false);
 
 
 //-------------------------Einlesen---------------------------------------
-/*
-void SensorEinlesen(){
 
-    for (byte i = 0; i < AnzahlSensor; i++) {
-        zustandBecher[i] = Becher[i].SensorLesen();
-    }
+void SensorEinlesen(){
+    
+    Becher0.ReadSensor();
+    Becher1.ReadSensor();
+
 }
-*/
+
 void ButtonEinlesen(){
     Energiesparmodus = EnergieButton.lesen();
 }
@@ -165,36 +164,25 @@ void ButtonEinlesen(){
 
 //-------------------------Aktualisieren-----------------------------------
 
-/*void aktRinge(){
-    for (byte i = 0; i < AnzahlSensor;i++) {
-      //Serial.println("aktRing");
-        Becher[i].aktFarbe(helligkeit);
-        delay(0);
-    }
+void aktRinge(){
+    Becher0.AktRinge();
+    //Becher1.AktRinge();
 
-}*/
-/*
+}
+
 void aktSpielstand(){
-    int n = 0;
     BecherCount0 = 0;
     BecherCount1 = 0;
-
-    for (byte i = 0; i < AnzahlMP; i++) {
-        for (byte m = 0; m < AnzahlProMP; m++) {
-            if (Becher[n].getStatus() == true) {
-                if (i == 0) {
-                    BecherCount0++;
-                }
-                if (i == 1) {
-                    BecherCount1++;
-                }                
-            }
-            
-            n++;
+   
+    for (byte i = 0; i < AnzahlPositionen; i++) {  
+        if (Becher0.getStatus(i) == true) {
+            BecherCount0++;
         }
-        
+        if (Becher1.getStatus(i) == true) {
+            BecherCount1++;
+        }
     }
-}*/
+}
 
 void aktAnzeige(byte Anzahlbecher, MatrixClass Matrix){
  
@@ -202,6 +190,22 @@ void aktAnzeige(byte Anzahlbecher, MatrixClass Matrix){
    
 }
 
+void aktModus() {                                           //Sparmodus
+
+    if (Energiesparmodus == true) {
+        helligkeit = SparmodusHelligkeit;
+    }
+    else {
+        helligkeit = NormaleHelligkeit;
+    }
+    Becher0.setModus(helligkeit, Energiesparmodus);
+    Becher1.setModus(helligkeit, Energiesparmodus);
+    Streifen0.setModus(helligkeit, Energiesparmodus);
+    Streifen1.setModus(helligkeit, Energiesparmodus);
+    AnzeigeMatrix0.setModus(helligkeit, Energiesparmodus);
+    AnzeigeMatrix1.setModus(helligkeit, Energiesparmodus);
+
+}
 
 //-------------------------Inits------------------------------------------
 /*

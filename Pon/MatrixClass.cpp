@@ -4,10 +4,10 @@ void MatrixClass::init(byte pin, byte team) {
 	this->Team = team;
     this->Pin = pin;
 	
-    matrix.Init(Pin, (Reihen * Spalten));
+    matrix.Init(Pin, (Reihen * Spalten), Team);
 
 
-    matrix.showPixel(Helligkeit);
+    matrix.showPixel();
 }
 
 void MatrixClass::aktMatrix(byte Zahl, byte hel){
@@ -70,7 +70,7 @@ void MatrixClass::schreibeMatrix(int aktMatrix[][8]) {
                // matrix.showPixel(Helligkeit);
             }
             else {
-                matrix.setPixelTeam(matrixID[reihe][spalte], Team);
+                matrix.setPixelTeam(matrixID[reihe][spalte]);
                               //  matrix.showPixel(Helligkeit);
             
             }
@@ -87,3 +87,7 @@ delay(10);
        // Serial.println("SChreibematrix case0 zuende");
 
 }
+
+  void MatrixClass::setModus(int hel, bool sparmodus){
+    
+  }

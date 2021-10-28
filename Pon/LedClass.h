@@ -15,7 +15,7 @@
 #include <avr/power.h>
 #endif
 
-
+#define AnzahllehreLEDs 3
 
 
 //#include "Farben.h"
@@ -26,22 +26,27 @@ private:
 	byte Pin;
 	byte Team;
 
-	 Adafruit_NeoPixel LEDPixel;
+	int Helligkeit;
+	bool EnergieModus;
+
+	Adafruit_NeoPixel LEDPixel;
 
 public:
 
 	//LedClass(byte pin, byte Anzahl);
-	void Init(byte pin, byte Anzahl);
-	void setPixelTeam(byte id, byte i);
+	void Init(byte pin, byte Anzahl, byte Team);
+	void setPixelTeam(byte id);
 	void setPixelRot(byte id);
 	void setPixelGruen(byte id);
 	void setPixelsRot(byte startid, byte laenge);
 	void setPixelsGruen(byte startid, byte laenge);
+	void setPixelsTeam(byte startid, byte laenge);
 
 
+	void setModus(int hel, bool sparmodus);
 
 
-	void showPixel(byte Helligkeit);
+	void showPixel();
 
 
 	/*LedClass(byte pin, byte Anzahl):

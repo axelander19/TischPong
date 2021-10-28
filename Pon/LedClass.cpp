@@ -28,8 +28,9 @@ LedClass::LedClass(byte pin, byte Anzahl) {
 }
 */
 
-void LedClass::Init(byte pin, byte Anzahl) {
+void LedClass::Init(byte pin, byte Anzahl, byte team) {
 	this->Pin = pin;
+  this->Team = team;
     pinMode(Pin, OUTPUT);
     Serial.println(pin);
 
@@ -52,6 +53,10 @@ void LedClass::setPixelsRot(byte startid, byte laenge) {
     for (int i = 0; i < laenge; i++) {
         setPixelRot(startid + i);
         delay(100);
+
+        if (EnergieModus == true) {
+            i = i + AnzahllehreLEDs;
+        }
     }
 }
 
@@ -66,14 +71,18 @@ void LedClass::setPixelGruen(byte id) {
 
 void LedClass::setPixelsGruen(byte startid, byte laenge) {
     Serial.println(Pin);
-    for (int i = 0; i < laenge; i++) {
+    for (byte i = 0; i < laenge; i++) {
         setPixelGruen(startid + i);
         delay(100);
+
+        if (EnergieModus == true) {
+            i = i + AnzahllehreLEDs;
+        }
     }
 }
 
-void LedClass::setPixelTeam(byte id, byte i) { 
-  if (i == 0) {
+void LedClass::setPixelTeam(byte id) { 
+  if (Team == 0) {
 
       LEDPixel.setPixelColor(id, LEDPixel.Color(10, 10, 10));
       //LEDPixel.begin();
@@ -81,19 +90,34 @@ void LedClass::setPixelTeam(byte id, byte i) {
       LEDPixel.show();
 
   }
-  if (i == 1) {
+  if (Team == 1) {
       LEDPixel.setPixelColor(id, LEDPixel.Color(10, 0, 10));
      // LEDPixel.begin();
       LEDPixel.show();
 
   }
-
 }
 
-void LedClass::showPixel(byte Helligkeit) {
+void LedClass::setPixelsTeam(byte startid, byte laenge) {
+
+    for (byte i = 0; i < laenge; i++) {
+        setPixelTeam(startid + i);
+        delay(100);
+
+        if (EnergieModus == true) {
+            i = i + AnzahllehreLEDs;
+        }
+    }
+}
+
+void LedClass::showPixel() {
     //Serial.println("in show guen pin: und id");
     //Serial.println(Pin);
-    //LEDPixel.setBrightness(Helligkeit);
+    LEDPixel.setBrightness(Helligkeit);
     LEDPixel.show();
 }
 
+void LedClass::setModus(int hel, bool sparmodus) {
+    Helligkeit = hel;
+    EnergieModus = sparmodus;
+}

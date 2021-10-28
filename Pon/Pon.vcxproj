@@ -85,10 +85,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Pon;C:\Users\Alex\Documents\Arduino\libraries\Adafruit_NeoPixel;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Program Files (x86)\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include-fixed;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Pon;$(ProjectDir)..\..\..\..\Documents\Arduino\libraries\Adafruit_NeoPixel;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core\avr-libc;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\variants\emoro_variants;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include-fixed;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\avr;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.Pon.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_atmega2560__;__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108013;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_atmega2560__;__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108010;ARDUINO_AVR_EMORO_2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -98,6 +98,7 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Pon.ino">
       <FileType>CppCode</FileType>
     </None>
@@ -106,10 +107,6 @@
     <ClCompile Include="BecherClass.cpp" />
     <ClCompile Include="ButtonClass.cpp" />
     <ClCompile Include="LedClass.cpp" />
-    <ClCompile Include="leds.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="MatrixClass.cpp" />
     <ClCompile Include="StreifenClass.cpp" />
   </ItemGroup>
@@ -118,10 +115,6 @@
     <ClInclude Include="ButtonClass.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="LedClass.h" />
-    <ClInclude Include="leds.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="MatrixClass.h" />
     <ClInclude Include="StreifenClass.h" />
     <ClInclude Include="__vm\.Pon.vsarduino.h" />
@@ -134,7 +127,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties config.Debug.customdebug_mega_atmega2560_debugger_type="universal" VM_ReCompileLibsOnProjectMacroChange="" />
+      <UserProperties config.Debug.customdebug_emoro_emoro_avr_emoro2560_debugger_type="universal" config.Debug.customdebug_mega_atmega2560_debugger_type="universal" VM_ReCompileLibsOnProjectMacroChange="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
