@@ -1,11 +1,11 @@
 #include "ButtonClass.h"
 
-void ButtonClass::init(byte pin){
+void ButtonClass::init(int pin){
   this->Pin = pin;
   pinMode(Pin, INPUT);
 }
 
 bool ButtonClass::lesen(){
-  status = analogRead(Pin);
+  status = digitalRead(Pin);
   return status;
 }

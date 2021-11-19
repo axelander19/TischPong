@@ -15,7 +15,7 @@
 #include <avr/power.h>
 #endif
 
-#define AnzahllehreLEDs 3
+#define AnzahllehreLEDs 5
 
 
 //#include "Farben.h"
@@ -25,51 +25,34 @@ class LedClass
 private:
 	byte Pin;
 	byte Team;
+	byte LedClassId;
 
 	int Helligkeit;
 	bool EnergieModus;
 
-	Adafruit_NeoPixel LEDPixel;
+	Adafruit_NeoPixel Matrix0;				//LEDID 0
+	Adafruit_NeoPixel Matrix1;				//LEDID 1
+	Adafruit_NeoPixel Ring0;				//LEDID 2
+	Adafruit_NeoPixel Ring1;				//LEDID 3
+	Adafruit_NeoPixel Streifen0;			//LEDID 4
+	Adafruit_NeoPixel Streifen1;			//LEDID 5
 
 public:
 
-	//LedClass(byte pin, byte Anzahl);
-	void Init(byte pin, byte Anzahl, byte Team);
-	void setPixelTeam(byte id);
-	void setPixelRot(byte id);
-	void setPixelGruen(byte id);
-	void setPixelsRot(byte startid, byte laenge);
-	void setPixelsGruen(byte startid, byte laenge);
-	void setPixelsTeam(byte startid, byte laenge);
+	void Init(byte pin, int Anzahl, byte Team, byte ledclassid);
+	//void setPixelTeam(byte id, byte ledclassid);
 
+	//void setPixelRot(byte id, byte ledclassid);
+	void setPixelsRot(byte startid, byte laenge, byte ledclassid);
 
+	
+
+	void setPixelsGruen(byte startid, byte laenge, byte ledclassid);
+	//void setPixelGruen(byte id, byte ledclassid);
+
+	void setPixel(byte id, byte ledclassid, int r, int g, int b);
+
+	void setPixelsTeam(byte startid, byte laenge, byte ledclassid);
 	void setModus(int hel, bool sparmodus);
-
-
-	void showPixel();
-
-
-	/*LedClass(byte pin, byte Anzahl):
-		LEDPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800){}*/
-	
-	
-	/*/
-	
-	{
-	this->Pin = pin;
-	pinMode(Pin, OUTPUT);
-	Serial.println(pin);
-
-	LEDPixel = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-	LEDPixel.setPixelColor(0, LEDPixel.Color(0, 255, 0));
-
-	LEDPixel.begin();
-	//LEDPixel.setBrightness(10);
-	 LEDPixel.show();
-
-}*/
-
-
-
 };
 #endif

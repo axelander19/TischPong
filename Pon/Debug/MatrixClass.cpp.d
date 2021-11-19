@@ -1,29 +1,18 @@
-C:\Users\fiscal\AppData\Local\Temp\VMBuilds\Pon\emoro_emoro_avr_emoro2560\Debug\MatrixClass.cpp.o: \
- C:\Users\fiscal\AppData\Local\Temp\VMBuilds\Pon\emoro_emoro_avr_emoro2560\Debug\MatrixClass.cpp \
- C:\Users\fiscal\AppData\Local\Temp\VMBuilds\Pon\emoro_emoro_avr_emoro2560\Debug\MatrixClass.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/arduino.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/binary.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/WCharacter.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/WString.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/HardwareSerial.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/Stream.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/Print.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/Printable.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/new.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/wiring_private.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/Arduino.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_interrupts.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_ultrasonic.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_servo.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_lcd.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_switch.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_bluetooth.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_acc.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_gyr.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_mag.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_2560.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/emoro_ds18s20.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\variants\emoro_variants/pins_arduino.h \
- C:\Users\fiscal\AppData\Local\Temp\VMBuilds\Pon\emoro_emoro_avr_emoro2560\Debug\LedClass.h \
- C:\Users\fiscal\Documents\Arduino\libraries\Adafruit_NeoPixel/Adafruit_NeoPixel.h \
- C:\Users\fiscal\AppData\Local\arduino15\packages\emoro\hardware\avr\3.2.2\cores\emoro_core/Arduino.h
+C:\Users\Alex\AppData\Local\Temp\VMBuilds\Pon\mega_atmega2560\Debug\MatrixClass.cpp.o: \
+ C:\Users\Alex\AppData\Local\Temp\VMBuilds\Pon\mega_atmega2560\Debug\MatrixClass.cpp \
+ C:\Users\Alex\AppData\Local\Temp\VMBuilds\Pon\mega_atmega2560\Debug\MatrixClass.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/HardwareSerial.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
+ C:\Users\Alex\AppData\Local\Temp\VMBuilds\Pon\mega_atmega2560\Debug\LedClass.h \
+ C:\Users\Alex\Documents\Arduino\libraries\Adafruit_NeoPixel/Adafruit_NeoPixel.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\cozggo0p.t0d\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h

@@ -15,10 +15,10 @@ class ButtonClass
 {
 private:
   bool status;
-  byte Pin;
+  int Pin;
   
 public:
-  void init(byte pin);
+  void init(int pin);
   bool lesen();
 };
 #endif
