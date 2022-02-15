@@ -34,6 +34,12 @@
     <ClCompile Include="BecherClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UnterBodenClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PotiClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Pon.vsarduino.h">
@@ -55,6 +61,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BecherClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnterBodenClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PotiClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

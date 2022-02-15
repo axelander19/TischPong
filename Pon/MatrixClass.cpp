@@ -1,16 +1,23 @@
 #include "MatrixClass.h"
 
-void MatrixClass::init(byte pin, byte team, byte ledid) {
+void MatrixClass::init(byte pin, byte team) {
 	this->Team = team;
     this->Pin = pin;
-    this->LedClassId = ledid;
 	
-    matrix.Init(Pin, (Reihen * Spalten), Team, LedClassId);
+    matrix.Init(Pin, (Reihen * Spalten), Team);
+
+    if (Team == 0) {
+        aktMatrix(99);
+    }
+    if (Team == 1) {
+        aktMatrix(100);
+    }
 }
 
 void MatrixClass::aktMatrix(byte Zahl){
-    Serial.println(Zahl);
-    switch (Zahl)
+    becher = Zahl;
+
+    switch (becher)
     {
     case 0:    
         schreibeMatrix(matrix0);
@@ -45,6 +52,12 @@ void MatrixClass::aktMatrix(byte Zahl){
     case 10:
         schreibeMatrix(matrix10);
         break;
+    case 99:
+        schreibeMatrix(matrixha);
+        break;
+    case 100:
+        schreibeMatrix(matrixllo);
+        break;
     default:
         break;
     }
@@ -53,39 +66,35 @@ void MatrixClass::aktMatrix(byte Zahl){
 void MatrixClass::schreibeMatrix(int aktMatrix[Reihen][Spalten]) {
     
     //byte id = IDStart;
-   // Serial.println("SChreibemtrix case0");
 
     for (byte reihe = 0; reihe < Reihen; reihe++) {
-             // Serial.println("neue Reihe");
 
         for (byte spalte = 0; spalte < Spalten; spalte++) {
 
             if (aktMatrix[reihe][spalte] == 1) {
                 //aktivieren led
-                              //          Serial.println(matrixID[reihe][spalte]);
-
-                matrix.setPixelsRot(matrixID[reihe][spalte], 1, LedClassId);
-               // matrix.showPixel(Helligkeit);
+                matrix.setPixelsRot(matrixID[reihe][spalte], 1);
             }
-            else {
-                matrix.setPixelsTeam(matrixID[reihe][spalte], 1, LedClassId);
-                              //  matrix.showPixel(Helligkeit);
-            
+            if (aktMatrix[reihe][spalte] == 0){
+                if (energiesparmodus == false) {
+                    matrix.setPixelsTeam(matrixID[reihe][spalte], 1);
+                }
+                if (energiesparmodus == true) {
+                    matrix.setPixelsOut(matrixID[reihe][spalte], 1);
+                }
             }
-                        //Serial.println(spalte);
-
-            //id++;
-            //delay(1);
         }
-               // Serial.println(F("SChreibematrix case0  reihe zuende"));
-                    //    Serial.println(reihe);
-//delay(10);
-
     }
-       // Serial.println("SChreibematrix case0 zuende");
-
 }
 
   void MatrixClass::setModus(int hel, bool sparmodus){
+      
+      energiesparmodus = sparmodus;
       matrix.setModus(hel, sparmodus);
+      aktMatrix(becher);
   }
+
+ void MatrixClass::setBrightness(int hel){
+        matrix.setBrightness(hel);
+    }
+    

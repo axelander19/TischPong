@@ -12,8 +12,8 @@
 
 
 
-#define AnzahlLEDproStreifen 60
-
+#define AnzahlLEDproStreifen 100
+#define AnzahlLEDWelle 5
 
 class StreifenClass
 {
@@ -25,13 +25,15 @@ private:
 	byte divider = 2;
 
 	LedClass streifen;
-	byte Helligkeit = 0;
  
+	int allowedPixel[AnzahlLEDproStreifen] = { 1 };
+
 public:
 	void init(byte pin, byte team);
-	//int *TeamColour();
-	void treffer();
 	void setModus(int hel, bool sparmodus);
+	void setBrightness(int hel);
+
+	void treffer();
 
 };
 #endif

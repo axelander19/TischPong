@@ -9,192 +9,110 @@
 
 #include "LedClass.h"
 
-void LedClass::Init(byte pin, int Anzahl, byte team, byte ledclassid) {
+void LedClass::Init(byte pin, int Anzahl, byte team) {
 	
     this->Pin = pin;
     this->Team = team;
     pinMode(Pin, OUTPUT);
-
-    switch (ledclassid)
-    {
-    case 0:
-        Matrix0 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Matrix0.setPixelColor(0, Matrix0.Color(0, 255, 0));
-        Matrix0.begin();
-        Matrix0.show();
-        break;
-    case 1:
-        Matrix1 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Matrix1.setPixelColor(0, Matrix1.Color(0, 255, 0));
-        Matrix1.begin();
-        Matrix1.show();
-        break;
-    case 2:
-        Ring0 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Ring0.setPixelColor(0, Ring0.Color(0, 255, 0));
-        Ring0.begin();
-        Ring0.show();
-    break;
-    case 3:
-        Ring1 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Ring1.setPixelColor(0, Ring1.Color(0, 255, 0));
-        Ring1.begin();
-        Ring1.show();
-    break;
-    case 4:
-        Streifen0 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Streifen0.setPixelColor(0, Streifen0.Color(0, 255, 0));
-        Streifen0.begin();
-        Streifen0.show();
-    break;
-    case 5:
-        Streifen1 = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-        Streifen1.setPixelColor(0, Streifen1.Color(0, 255, 0));
-        Streifen1.begin();
-        Streifen1.show();
-    break;
-    default:
-        break;
-    }
-    /*LEDPixel = Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);
-    LEDPixel.setPixelColor(0, LEDPixel.Color(0, 255, 0));
-    LEDPixel.begin();
-    LEDPixel.show();*/
-
-}
-
-
-
-void LedClass::setPixel(byte id, byte ledclassid, int r, int g, int b) {
-    switch (ledclassid)
-    {
-    case 0:
-        Matrix0.setPin(6);
-        Matrix0.setPixelColor(id, Matrix0.Color(r, g, b));
-        Matrix0.setBrightness(Helligkeit);
-        Matrix0.show();
-        break;
-    case 1:
-        Matrix1.setPixelColor(id, Matrix1.Color(r, g, b));
-        Matrix1.setBrightness(Helligkeit);
-        Matrix1.show();
-        break;
-    case 2:
-        Serial.print(LedClassId);
-        Ring0.setPin(3);
-
-        Ring0.setPixelColor(id, Ring0.Color(r, g, b));
-        Ring0.setBrightness(Helligkeit);
-        Ring0.show();
-        break;
-    case 3:
-        Ring1.setPixelColor(id, Ring1.Color(r, g, b));
-        Ring1.setBrightness(Helligkeit);
-        Ring1.show();
-        break;
-    case 4:
-        Streifen0.setPixelColor(id, Streifen0.Color(r, g, b));
-        Streifen0.setBrightness(Helligkeit);
-        Streifen0.show();
-        break;
-    case 5:
-        Streifen0.setPin(Pin);
-        Streifen1.setPixelColor(id, Streifen1.Color(r, g, b));
-        Streifen1.setBrightness(Helligkeit);
-        Streifen1.show();
-        break;
-    default:
-        break;
-    }
-}
-
-
-
-/*
-void LedClass::setPixelRot(byte id, byte ledclassid) {
-    LEDPixel.setPixelColor(id, LEDPixel.Color(255, 0, 0));
-    LEDPixel.setBrightness(Helligkeit);
-    LEDPixel.show();
-}*/
-
-void LedClass::setPixelsRot(byte startid, byte laenge, byte ledclassid) {
-
-    for (int i = 0; i < laenge; i++) {
-        setPixel(startid + i, ledclassid, 255, 0, 0);
-
-        if (EnergieModus == true) {
-            i = i + AnzahllehreLEDs;
-        }
-    }
-}
-
-
-
-
-
-/*
-void LedClass::setPixelGruen(byte id, byte ledclassid) {
-      
-    LEDPixel.setPixelColor(id, LEDPixel.Color(0, 255, 0));
-    LEDPixel.setBrightness(Helligkeit);
-    LEDPixel.show();
-}*/
-
-void LedClass::setPixelsGruen(byte startid, byte laenge, byte ledclassid) {
-
-    for (int i = 0; i < laenge; i++) {
-        setPixel(startid + i, ledclassid, 0, 255, 0);
-
-        if (EnergieModus == true) {
-            i = i + AnzahllehreLEDs;
-        }
-    }
-}
-
-
-
-
-
-
-
-
-void LedClass::setPixelsTeam(byte startid, byte laenge, byte ledclassid) {
-
-    for (byte i = 0; i < laenge; i++) {
-        if (Team == 0) {
-            setPixel(startid + i, ledclassid, 10, 10, 10);
-        }
-
-        if(Team == 1){
-            setPixel(startid + i, ledclassid, 10, 0, 10);
-
-        }
         
-        if (EnergieModus == true) {
-            i = i + AnzahllehreLEDs;
+    if (Team == 0) {
+        ColourTeam = ColourTeam0;
+    }
+    if (Team == 1) {
+        ColourTeam = ColourTeam1;
+    }
+    LEDs = new Adafruit_NeoPixel(Anzahl, Pin, NEO_GRB + NEO_KHZ800);        
+    LEDs->setPixelColor(0, LEDs->Color(0, 255, 0));       
+    LEDs->begin();    
+    LEDs->show();       
+}
+
+void LedClass::setPixels(byte startid, byte laenge, uint32_t Colour) {
+
+    for (int i = 0; i < laenge; i++) {
+        setPixel(startid + i, Colour);
+
+        if (laenge > AnzahllehreLEDs) {
+            if (EnergieModus == true) {
+                for (int j = i + 1; j < (i + AnzahllehreLEDs + 1); j++) {
+                    setPixel(startid + j, Colourout);
+
+                }
+                i = i + AnzahllehreLEDs;
+            }
+        }
+    }
+
+}
+
+
+void LedClass::setPixel(byte id, uint32_t Colour) {
+   
+    LEDs->setPixelColor(id, Colour);
+    LEDs->setBrightness(Helligkeit);
+    LEDs->show();           
+}
+
+
+void LedClass::setPixelsRot(byte startid, byte laenge) {
+    
+    setPixels(startid, laenge, Colourrot);
+}
+
+
+void LedClass::setPixelsGruen(byte startid, byte laenge) {
+    
+    setPixels(startid, laenge, Colourgruen);
+}
+
+
+void LedClass::setPixelsTeam(byte startid, byte laenge){
+    
+    setPixels(startid, laenge, ColourTeam);
+}
+
+void LedClass::setPixelsOut(byte startid, byte laenge) {
+
+    setPixels(startid, laenge, Colourout);
+}
+
+void LedClass::setModus(int hel, bool sparmodus){
+    Helligkeit = hel;
+    EnergieModus = sparmodus;   
+    LEDs->setBrightness(hel);
+    LEDs->show();
+}
+
+void LedClass::setBrightness(int hel){
+    LEDs->setBrightness(hel);
+    LEDs->show();
+}
+
+void LedClass::RunningLights(int anzahlled) {
+    for(int i = 0; i < 100; i++){
+        int Position = 0;
+
+        for (int j = 0; j < anzahlled * 2; j++)
+        {
+            Position++; // = 0; //Position + Rate;
+            for (int i = 0; i < anzahlled; i++) {
+                // sine wave, 3 offset waves make a rainbow!
+                //float level = sin(i+Position) * 127 + 128;
+                //setPixel(i,level,0,0);
+                //float level = sin(i+Position) * 127 + 128;
+                LEDs->setPixelColor(i, ((sin(i + Position) * 127 + 128) / 255) * 100,
+                    ((sin(i + Position) * 127 + 128) / 255) * 100,
+                    ((sin(i + Position) * 127 + 128) / 255) * 100);
+            }
+
+            LEDs->show();
+            delay(100);
+    
         }
     }
 }
-/*
-void LedClass::setPixelTeam(byte id, byte ledclassid) {
 
-    if (Team == 0) {
-        LEDPixel.setPixelColor(id, LEDPixel.Color(10, 10, 10));
-        LEDPixel.setBrightness(Helligkeit);
-        LEDPixel.show();
-    }
-
-    if (Team == 1) {
-        LEDPixel.setPixelColor(id, LEDPixel.Color(10, 0, 10));
-        LEDPixel.setBrightness(Helligkeit);
-        LEDPixel.show();
-    }
-}*/
-
-void LedClass::setModus(int hel, bool sparmodus) {
-    Helligkeit = hel;
-    EnergieModus = sparmodus;
-   // LEDPixel.setBrightness(Helligkeit);
-   // LEDPixel.show();
-
+void LedClass::changeTeam(bit newTeam){
+    Team = newTeam;
+}
 }

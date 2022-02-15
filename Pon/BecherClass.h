@@ -2,7 +2,7 @@
 
 #include "LedClass.h"
 
-#define AnzahlPositionen 16
+#define AnzahlPositionen 11
 #define AnzahlLEDproRing 24
 
 class BecherClass
@@ -22,18 +22,23 @@ private:
 	int StartLedID[AnzahlPositionen + 1];
 	int SensorID[AnzahlPositionen + 1];
 	bool Status[AnzahlPositionen] = { false };
-	bool PreStatus[AnzahlPositionen] = {true};
+	bool PreStatus[AnzahlPositionen] = { true };
 
 	LedClass LED;
 	byte LedClassId;
 
-	void SourceSelect(int sensorid);
+	bool statuschange = false;
+
+	void SourceSelect(byte sensorid);
 
 public:
 	void init(bool team, int pinLed, int pinSensor, int pinSelect, byte ledid);
 	void AktRinge();
 	void ReadSensor();
-	void setStatus(int status, int id);
+	void setStatus(bool status, int id);
 	bool getStatus(int id);
+
 	void setModus(int hel, bool sparmodus);
+	void setBrightness(int hel);
+	void setPixel(byte id, byte ledclassid, int r, int g, int b, int length);
 };

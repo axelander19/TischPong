@@ -15,7 +15,7 @@
 #include <avr/power.h>
 #endif
 
-#define AnzahllehreLEDs 5
+#define AnzahllehreLEDs 3
 
 
 //#include "Farben.h"
@@ -25,34 +25,38 @@ class LedClass
 private:
 	byte Pin;
 	byte Team;
-	byte LedClassId;
 
-	int Helligkeit;
-	bool EnergieModus;
+	uint32_t Colourgruen = LEDs->Color(0, 255, 0);
+	uint32_t Colourrot = LEDs->Color(255, 0, 0);
+	uint32_t ColourTeam1 = LEDs->Color(255, 120, 0);
+	uint32_t ColourTeam0 = LEDs->Color(0, 180, 255);
+	uint32_t ColourTeam = LEDs->Color(0, 0, 0);
+	uint32_t Colourout = LEDs->Color(0, 0, 0);
 
-	Adafruit_NeoPixel Matrix0;				//LEDID 0
-	Adafruit_NeoPixel Matrix1;				//LEDID 1
-	Adafruit_NeoPixel Ring0;				//LEDID 2
-	Adafruit_NeoPixel Ring1;				//LEDID 3
-	Adafruit_NeoPixel Streifen0;			//LEDID 4
-	Adafruit_NeoPixel Streifen1;			//LEDID 5
+
+	int Helligkeit=50;
+	bool EnergieModus = false;
+
+	Adafruit_NeoPixel *LEDs;
 
 public:
 
-	void Init(byte pin, int Anzahl, byte Team, byte ledclassid);
-	//void setPixelTeam(byte id, byte ledclassid);
+	void RunningLights(int anzahlled);
 
-	//void setPixelRot(byte id, byte ledclassid);
-	void setPixelsRot(byte startid, byte laenge, byte ledclassid);
-
+	void Init(byte pin, int Anzahl, byte Team);
 	
+	void setPixel(byte id, uint32_t Colour);
+	
+	void setPixels(byte startid, byte laenge, uint32_t Colour);
 
-	void setPixelsGruen(byte startid, byte laenge, byte ledclassid);
-	//void setPixelGruen(byte id, byte ledclassid);
+	void setPixelsRot(byte startid, byte laenge);
+	void setPixelsGruen(byte startid, byte laenge);
+	void setPixelsTeam(byte startid, byte laenge);
+	void setPixelsOut(byte startid, byte laenge);
 
-	void setPixel(byte id, byte ledclassid, int r, int g, int b);
-
-	void setPixelsTeam(byte startid, byte laenge, byte ledclassid);
 	void setModus(int hel, bool sparmodus);
+	void setBrightness(int hel);
+
+  void changeTeam(bit newTeam);
 };
 #endif

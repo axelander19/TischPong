@@ -2,8 +2,8 @@
 #include "MatrixClass.h"
 #include "StreifenClass.h"
 #include "BecherClass.h"
-
-
+#include "UnterBodenClass.h"
+#include "PotiClass.h"
 
 
 //-------------------------Pins-------------------------------------------
@@ -11,86 +11,109 @@
 #define PinSensoren0 A0
 #define PinSensoren1 A1
 
-#define PinSourceselect0 8
-#define PinSourceselect1 30
+#define PinSourceselect0 47
+#define PinSourceselect1 39
 #define PinRinge0 3
-#define PinRinge1 10
+#define PinRinge1 4
 
-#define PinStreifen0 12
-#define PinStreifen1 1
-#define PinMatrix0 6
+#define PinStreifen0 10
+#define PinStreifen1 11
+
+#define PinStreifenUnten0 
+#define PinStreifenUnten1 
+#define PinStreifenUnten 34
+
+#define PinMatrix0 8
 #define PinMatrix1 9
-#define PinSchalter 51
+
+#define PinSparmodus 42
+#define PinPoti A5
+
+//--------------------------------------------------------------------------
 
 #define NormaleHelligkeit 50
-#define SparmodusHelligkeit 10
+#define SparmodusHelligkeit 5
 
+byte grundHelligkeit;
 byte helligkeit;
 bool Energiesparmodus = false;
+bool Energiesparmodusbevore = true;
+float faktor = 0;
+float faktorBevore = 0;
 
-#define AnzahlPositionen 16
+#define AnzahlPositionen 11
 
 
 //inits
-void initButton();
+void initButtons();
 void initMatrix();
 void initStreifen();
 
 //Einlesen
-void ButtonEinlesen();
+void ButtonsEinlesen();
 
 //bool zustandBecher[AnzahlSensor];
 void aktSpielstand();
 void aktRinge();
 void aktModus();
 
-
+//void StreifenTreffer();
 
 byte BecherCount0 = 0;                    //linke Seite
 byte Becher0davor = 0;
 byte BecherCount1 = 0;                    //rechte Seite
 byte Becher1davor = 0;
 
+ButtonClass EnergieButton;
+PotiClass Poti;
 
 BecherClass Becher0;
 BecherClass Becher1;
-ButtonClass EnergieButton;
+
 MatrixClass AnzeigeMatrix0;
 MatrixClass AnzeigeMatrix1;
-StreifenClass Streifen1;
+
 StreifenClass Streifen0;
+StreifenClass Streifen1;
+
+UnterBodenClass StreifenUnten;
+//UnterBodenClass Streifen0Unten;
+//UnterBodenClass Streifen1Unten;
+
+//Adafruit_NeoPixel testledmatrix;
+//Adafruit_NeoPixel testledring;
+
 
 int temp = 0;
 //-------------------------Setup-------------------------------------------
 
 void setup()
 {
-   //Wire.begin();        // join i2c bus (address optional for master)
+    //Wire.begin();        // join i2c bus (address optional for master)
 
-   Serial.begin(9600);
-  // Serial.println(F("Start"));
+    Serial.begin(9600);
+
+    //Buttons Initialisieren
+    initButtons();
+
     //Sensoren+Ringe Initialisieren
-    //initBecher();
-   Becher0.init(0, PinRinge0, PinSensoren0, PinSourceselect0, 2);
-   //Becher1.init(1, PinRinge1, PinSensoren1, PinSourceselect1, 3);
-
-//    Stripes initialisieren
-//initStreifen();
-       //Buttons Initialisieren
-   initButton();
+    initBecher();
+    
+    //Stripes initialisieren
+    initStreifen();
         
     //Anzeige Initialisieren
     initMatrix(); 
+
  }
 
 //-------------------------Loop-------------------------------------------
-
 void loop()
 {
     Serial.println("main");
 
     //----------------------------------//
-    ButtonEinlesen();                 //
+    ButtonsEinlesen();                   //
                                         //--Stromsparmodus                    Hellikeit und status energiesparen wird an klassen gegeben        AUF ÄNDERUNG BASIEREND ALLE LEEDS UPDATEN
     aktModus();                         //                                 
     //----------------------------------//
@@ -103,8 +126,6 @@ void loop()
         // Spielstand aktualisieren
     aktSpielstand();                            //Bechercounts werden berrechnet
       
-    Serial.println(BecherCount0);
-    //Serial.println(BecherCount1);
     delay(10);
   
     if (Becher0davor != BecherCount0) {
@@ -116,38 +137,28 @@ void loop()
     delay(10);
 
 
-   /* if (Becher0 < Becher0davor) {               //wenn Becher weniger als davor
-                  
-        Streifen0.treffer();                    //led einmal halbe runde
-        //aktRinge();                             //bei hälfte becher ring aktualisieren
+    if (BecherCount0 < Becher0davor) {               //wenn Becher weniger als davor
+                 
+        Streifen0.treffer();
+        //led einmal halbe runde
+        aktRinge();                             //bei hälfte becher ring aktualisieren
+        
+        StreifenUnten.treffer(0);                   //evtl immer in der gewinnerteamfarbe           -        kurz azfflackern wenn getroffen   evtl wenn ring aktualisiert wird
         Streifen0.treffer();                    //runde zu ende
     }
-    if (Becher1 < Becher1davor) {
-        Streifen1.treffer();                    //led einmal halbe runde
+    if (BecherCount1 < Becher1davor) {
+        //Streifen1.treffer();                    //led einmal halbe runde
         //aktRinge();                             //bei hälfte becher ring aktualisieren
-        Streifen1.treffer();                    //runde zu ende
-    }*/
+        //Streifen1.treffer();                    //runde zu ende
+        //StreifenUnten.treffer(1);
+    }
 
     //Becher0.setStatus(true, temp);
     //Becher0.setStatus(false, temp-1);
     aktRinge();
 
-      /*
-    if(BecherCount0 ==11){
-      BecherCount0=0;
-      BecherCount1=0;
-    }
 
-    BecherCount0++;
-    BecherCount1++;
-    if (Becher[0].getStatus() == true) {
-        Becher[0].setStatus(false);
-    }
-    else { Becher[0].setStatus(true); }
-    Becher[1].setStatus(false);
-    
-    Becher0davor = BecherCount0;
-    Becher1davor = BecherCount1;*/
+   
     delay(10);
 }
 
@@ -155,8 +166,11 @@ void loop()
 //-------------------------Einlesen---------------------------------------
 
 
-void ButtonEinlesen(){
+void ButtonsEinlesen(){
+    Energiesparmodusbevore = Energiesparmodus;
     Energiesparmodus = EnergieButton.lesen();
+    faktorBevore = faktor;
+    faktor = Poti.lesen();
 }
 
 
@@ -174,18 +188,15 @@ void aktSpielstand(){
 
     BecherCount0 = 0;
     BecherCount1 = 0;
-    Serial.println(BecherCount0);
-    Serial.println(BecherCount1);
+    
 
-    for (byte i = 0; i < /*AnzahlPositionen*/2; i++) {  
+    for (byte i = 0; i < /*AnzahlPositionen-1*/2; i++) {  
         if ((Becher0.getStatus(i)) == true) {
             BecherCount0++;
-            Serial.println(BecherCount0);
 
         }
         if (Becher1.getStatus(i) == true) {
             BecherCount1++;
-            Serial.println(BecherCount1);
 
         }
     }
@@ -199,33 +210,56 @@ void aktSpielstand(){
 
 void aktModus() {                                           //Sparmodus
 
-    if (Energiesparmodus == true) {
-        helligkeit = SparmodusHelligkeit;
+    if (faktor != faktorBevore) {
+        helligkeit = grundHelligkeit * faktor;
+        
+        AnzeigeMatrix0.setBrightness(helligkeit);
+        AnzeigeMatrix1.setBrightness(helligkeit);
+        Becher0.setBrightness(helligkeit);
+        Becher1.setBrightness(helligkeit);
+        Streifen0.setBrightness(helligkeit);
+        Streifen1.setBrightness(helligkeit);
     }
-    else {
-        helligkeit = NormaleHelligkeit;
-    }
-    Becher0.setModus(helligkeit, Energiesparmodus);
-    Becher1.setModus(helligkeit, Energiesparmodus);
-    Streifen0.setModus(helligkeit, Energiesparmodus);
-    Streifen1.setModus(helligkeit, Energiesparmodus);
-    AnzeigeMatrix0.setModus(helligkeit, Energiesparmodus);
-    AnzeigeMatrix1.setModus(helligkeit, Energiesparmodus);
 
+
+    if (Energiesparmodus != Energiesparmodusbevore) {
+        if (Energiesparmodus == true) {
+            grundHelligkeit = SparmodusHelligkeit;
+        }
+        if (Energiesparmodus == false) {
+            grundHelligkeit = NormaleHelligkeit;
+        }
+        helligkeit = grundHelligkeit * faktor;
+        AnzeigeMatrix0.setModus(helligkeit, Energiesparmodus);
+        //AnzeigeMatrix1.setModus(helligkeit, Energiesparmodus);
+        Becher0.setModus(helligkeit, Energiesparmodus);
+        //Becher1.setModus(helligkeit, Energiesparmodus);
+        Streifen0.setModus(helligkeit, Energiesparmodus);
+        //Streifen1.setModus(helligkeit, Energiesparmodus);
+  
+    }
 }
 
 //-------------------------Inits------------------------------------------
 
-void initButton(){
-  EnergieButton.init(PinSchalter);
+void initButtons(){
+  EnergieButton.init(PinSparmodus);
+  Poti.init(PinPoti);
 }
 
 void initMatrix() {
-    AnzeigeMatrix0.init(PinMatrix0, 0, 0);
-    AnzeigeMatrix1.init(PinMatrix1, 1, 1);
+    AnzeigeMatrix0.init(PinMatrix0, 0);
+    //AnzeigeMatrix1.init(PinMatrix1, 1);
 }
 
 void initStreifen() {
-   // Streifen0.init(PinStreifen0, 0, 4);
-   // Streifen1.init(PinStreifen1, 1, 5);
+    Streifen0.init(PinStreifen0, 0);
+    //Streifen0Unten.init(PinStreifenUnten0, 0);
+    //Streifen1.init(PinStreifen1, 1);
+    StreifenUnten.init(PinStreifenUnten, 0);
+}
+
+void initBecher() {
+    Becher0.init(0, PinRinge0, PinSensoren0, PinSourceselect0, 2);
+    //Becher1.init(1, PinRinge1, PinSensoren1, PinSourceselect1, 3);
 }

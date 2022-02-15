@@ -19,15 +19,20 @@ class MatrixClass
 {
 
 public:
-	void init(byte pin, byte Team, byte ledid);
+	void init(byte pin, byte Team);
 	void aktMatrix(byte Zahl);
 	void setModus(int hel, bool sparmodus);
+	void setBrightness(int hel);
+
 
 private:
 	byte IDStart = 0;
 	byte Pin;
 	byte Team;
-	byte LedClassId;
+
+	byte becher;
+
+	byte energiesparmodus = false;
 	  
 	LedClass matrix;
 	
@@ -139,6 +144,24 @@ private:
 		{0, 0, 1, 0, 0, 0, 1, 0},
 		{0, 0, 1, 0, 0, 0, 1, 0},
 		{0, 0, 0, 1, 1, 1, 0, 0} };
+	int	matrixha[Reihen][Spalten] = {
+		{0, 0, 0, 0, 0, 0, 0, 0},
+		{1, 0, 0, 1, 0, 0, 1, 0},
+		{1, 0, 0, 1, 0, 1, 1, 1},
+		{1, 0, 0, 1, 0, 1, 0, 1},
+		{1, 1, 1, 1, 0, 1, 1, 1},
+		{1, 0, 0, 1, 0, 1, 0, 1},
+		{1, 0, 0, 1, 0, 1, 0, 1},
+		{1, 0, 0, 1, 0, 1, 0, 1} };
+	int	matrixllo[Reihen][Spalten] = {
+			{0, 0, 0, 0, 0, 0, 0, 0},
+			{1, 0, 1, 0, 0, 1, 1, 0},
+			{1, 0, 1, 0, 1, 0, 0, 1},
+			{1, 0, 1, 0, 1, 0, 0, 1},
+			{1, 0, 1, 0, 1, 0, 0, 1},
+			{1, 0, 1, 0, 1, 0, 0, 1},
+			{1, 0, 1, 0, 1, 0, 0, 1},
+			{1, 0, 1, 0, 0, 1, 1, 0} };
 
 	void schreibeMatrix(int	aktMatrix[Reihen][Spalten]);
 };
