@@ -5,6 +5,7 @@
 #include "UnterBodenClass.h"
 #include "PotiClass.h"
 
+#define debug true
 
 //-------------------------Pins-------------------------------------------
 
@@ -110,7 +111,9 @@ void setup()
 //-------------------------Loop-------------------------------------------
 void loop()
 {
-    Serial.println("main");
+    if(debug==true){
+      Serial.println("Loop beginnt");
+    }
 
     //----------------------------------//
     ButtonsEinlesen();                   //
@@ -127,16 +130,18 @@ void loop()
     aktSpielstand();                            //Bechercounts werden berrechnet
       
     delay(10);
-  
+
+      //Spielstandsanzeige (Matrix) aktualisieren
     if (Becher0davor != BecherCount0) {
         AnzeigeMatrix0.aktMatrix(BecherCount0);
     }
     if (Becher0davor != BecherCount1) {
      //   AnzeigeMatrix1.aktMatrix(BecherCount1);
     }
+    
     delay(10);
 
-
+    //trefferdedektion
     if (BecherCount0 < Becher0davor) {               //wenn Becher weniger als davor
                  
         Streifen0.treffer();
